@@ -5,4 +5,4 @@ target/
 .settings/org.eclipse.core.resources.prefs
 .project
 .classpath
-data/*
+data/*.csv
