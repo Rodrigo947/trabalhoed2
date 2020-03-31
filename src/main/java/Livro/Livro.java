@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Livro;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -12,12 +8,12 @@ import java.util.List;
 /**
  *
  */
-public class Livro {
+public class Livro implements Serializable{
     
     private int rank; // ranking na lista de mais vendidos
-    private int categorie; // lista de ids de categorias de livros (os nomes das categorias estão em categories.csv)
-    private int id; // id único do livro atribuído pelo Bookdepository.com
-    private int publicationPlace; // id do local de publicação do livro(os locas de publicação estão em places.csv) 
+    private int categorie; //* lista de ids de categorias de livros (os nomes das categorias estão em categories.csv)
+    private int id; // *id único do livro atribuído pelo Bookdepository.com
+    private int publicationPlace; // *id do local de publicação do livro(os locas de publicação estão em places.csv) 
     private int ratingsAVG; // avaliação média 0-5
     private int ratingsCount; // número de avaliações   
             
@@ -39,7 +35,7 @@ public class Livro {
     
     private List<String> lang; // lista de idiomas do livro
     private List<Integer> author; //lista de ids de autores entre colchetes e separados por vírgulas (os nomes dos autores associados aos ids estão em authors.csv)
-    private List<Integer> format; // id do formato do livro(os formatos possiveis estão em formats.csv)
+    private List<Integer> format; //* id do formato do livro(os formatos possiveis estão em formats.csv)
     
     private Date indexDate; // data de indexação
     private Date publicationDate; // data de publicação
