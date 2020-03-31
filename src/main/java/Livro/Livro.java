@@ -31,24 +31,22 @@ public class Livro implements Serializable {
     private String publisher; // editora
     private String title; // título
     private String publicationPlace; // *id do local de publicação do livro(os locas de publicação estão em places.csv)
-   
-    private String[] categorie; //* lista de ids de categorias de livros (os nomes das categorias estão em categories.csv)
-    private String[] author; //*vetor de ids de autores entre colchetes e separados por vírgulas (os nomes dos autores associados aos ids estão em authors.csv)
-    private String[] format; //* id do formato do livro(os formatos possiveis estão em formats.csv)
-    private String[] lang; // vetor de idiomas do livro
-    
+
+    private List<String> categorie; //* lista de ids de categorias de livros (os nomes das categorias estão em categories.csv)
+    private List<String> author; //*vetor de ids de autores entre colchetes e separados por vírgulas (os nomes dos autores associados aos ids estão em authors.csv)
+    private List<String> format; //* id do formato do livro(os formatos possiveis estão em formats.csv)
+    private List<String> lang; // vetor de idiomas do livro
 
     private Date indexDate; // data de indexação
     private Date publicationDate; // data de publicação
 
     private URL url; // url relativa (https://bookdepository.com + url)
 
-    public Livro(int rank, int id, int ratingsAVG, int ratingsCount, float dimensionX, float dimensionY, 
-            float dimensionZ, float weight, String edition, String editionStatment, String description, 
+    public Livro(int rank, int id, int ratingsAVG, int ratingsCount, float dimensionX, float dimensionY,
+            float dimensionZ, float weight, String edition, String editionStatment, String description,
             String forAges, String illustrationNotes, String imprint, String isbn10, String isbn13,
-            String publisher, String title,String publicationPlace, String[] categorie,
-            String[] author, String[]format,String[] lang, Date indexDate, Date publicationDate, URL url)
-    {
+            String publisher, String title, String publicationPlace, List<String> categorie,
+            List<String> author, List<String> format, List<String> lang, Date indexDate, Date publicationDate, URL url) {
         this.rank = rank;
         this.id = id;
         this.ratingsAVG = ratingsAVG;
@@ -59,22 +57,22 @@ public class Livro implements Serializable {
         this.dimensionZ = dimensionZ;
         this.weight = weight;
         //========================
-        this.edition = edition;
-        this.editionStatment = editionStatment;
-        this.description = description;
-        this.forAges = forAges;
-        this.illustrationsNote = illustrationNotes;
-        this.imprint = imprint;
-        this.isbn10 = isbn10;
-        this.isbn13 = isbn13;
-        this.publisher = publisher;
-        this.title = title;
-        this.publicationPlace = publicationPlace;
+        this.edition = preencheString(edition, 0);
+        this.editionStatment = preencheString(editionStatment, 0);
+        this.description = preencheString(description, 0);
+        this.forAges = preencheString(forAges, 0);
+        this.illustrationsNote = preencheString(illustrationNotes, 0);
+        this.imprint = preencheString(imprint, 0);
+        this.isbn10 = preencheString(isbn10, 0);
+        this.isbn13 = preencheString(isbn13, 0);
+        this.publisher = preencheString(publisher, 0);
+        this.title = preencheString(title, 0);
+        this.publicationPlace = preencheString(publicationPlace, 0);
         //========================
-        this.categorie = categorie;
-        this.author = author;
-        this.format = format;
-        this.lang = lang;
+        this.categorie = preencheListaString(categorie, 0, 0);
+        this.author = preencheListaString(author, 0, 0);
+        this.format = preencheListaString(format, 0, 0);
+        this.lang = preencheListaString(lang, 0, 0);
         //========================
         this.indexDate = indexDate;
         this.publicationDate = publicationDate;
@@ -84,36 +82,64 @@ public class Livro implements Serializable {
     public Livro() {
 
     }
-    
-    public String preencheString(String str, int tamMax){
-        if(str.length() > tamMax){
+
+    private String preencheString(String str, int tamMax) {
+        if (str.length() > tamMax) {
             return str.substring(0, tamMax);
-        }else if(str.length() < tamMax){
+        } else if (str.length() < tamMax) {
             String aux = new String();
             aux = str;
             for (int i = aux.length(); i < tamMax; i++) {
                 aux.concat("*");//preenche a string com "*" caso a string passada seja menor que o tamanho maximo
             }
             return aux;
-        }else{
+        } else {
             return str;
         }
     }
-    
+
+    private List<String> preencheListaString(List<String> str, int tamMaxStr, int tamMaxList) {
+        List<String> aux = null;
+        if (str.size() >= tamMaxList) {
+            for (int i = 0; i < tamMaxList; i++) {
+                aux.add(preencheString(str.get(i), tamMaxStr));//cria uma sublista do tamanho maximo passado
+            }
+            return aux;
+        } else {
+            for (int i = 0; i < tamMaxList; i++) {
+                String strAux = null;
+                if (i < str.size()) {
+                    aux.add(preencheString(str.get(i), tamMaxStr));
+                } else {
+                    aux.add(preencheString(strAux, tamMaxStr));//preenche a lista com strings cheias de "*" caso a 
+                }                                                                //lista passada seja menor que o tamanho maximo
+            }
+            return aux;
+        }
+    }
+
+    public List<String> getAuthor() {
+        return author;
+    }
+
+    public List<String> getCategorie() {
+        return categorie;
+    }
+
+    public List<String> getFormat() {
+        return format;
+    }
+
+    public List<String> getLang() {
+        return lang;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String[] getAuthor() {
-        return author;
-    }
-
-    public String[] getCategorie() {
-        return categorie;
     }
 
     public String getDescription() {
@@ -144,10 +170,6 @@ public class Livro implements Serializable {
         return forAges;
     }
 
-    public String[] getFormat() {
-        return format;
-    }
-
     public int getId() {
         return id;
     }
@@ -170,10 +192,6 @@ public class Livro implements Serializable {
 
     public String getIsbn13() {
         return isbn13;
-    }
-
-    public String[] getLang() {
-        return lang;
     }
 
     public Date getPublicationDate() {
