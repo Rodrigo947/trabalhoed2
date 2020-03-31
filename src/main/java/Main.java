@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Livro.Livro;
@@ -64,8 +65,11 @@ public class Main {
 
         File f = new File("data/dataBytes.bin");
 
-        long randomByte = ThreadLocalRandom.current().nextLong(f.length());
+        Random r = new Random();
+        r.setSeed(123456);
+        int randomByte = r.nextInt((int)f.length());
         System.out.println("Numero Sorteado: "+randomByte);
+        
         byte[] linha = Leitura.randomLineFile(f, randomByte, 533);
         Livro l = Leitura.toObjeto(linha);
         System.out.println(l.getTitle());
