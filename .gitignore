@@ -7,4 +7,5 @@ target/
 .classpath
 data/*.csv
 data/*.bin
+data/*.txt
 .vscode

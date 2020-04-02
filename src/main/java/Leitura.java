@@ -2,9 +2,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 import Livro.Livro;
 
 public class Leitura {
@@ -98,6 +102,77 @@ public class Leitura {
         }
 
         return lineBytes;
+    }
+    // END ------------------
+
+    /**
+     * A partir do arquivo dataset a função retorna um arquivo com o atributo escolhido de cada registro,
+     * além de retornar o tamanho da maior string e sua linha correspondente
+     *
+     * @param file         arquivo dataset
+     * @param nomeArqSaida nome do arquivo de saida que conterá todos os registros do atributo escolhido
+     * @param atributo     posição correspondente ao atributo requerido, por exemplo, caso o atributo 
+     *                     desejado seja authors deve colocar 1, categories = 3 e assim sucessivamente
+     *                     seguindo o cabeçalho do dataset
+     * 
+     * @return escreve no terminal o tamanho da maior string e a linha correspondente
+     */
+    public static void tamString(File file, String nomeArqSaida, int atributo) throws IOException {
+        Scanner sc = new Scanner(file);
+        FileWriter arq = new FileWriter("data/"+nomeArqSaida+".txt");
+        String linha, aux = "";
+
+        int quantAtributos = 0;
+        long quantlinhas = 0, tamMaiorString = 0, maiorLinha = 0;
+
+        PrintWriter gravarArq = new PrintWriter(arq);
+
+        sc.nextLine(); // pular o cabeçalho
+
+        while (sc.hasNextLine()) {
+
+            linha = sc.nextLine();
+            quantlinhas++;
+
+            for (int i = 0; i < linha.length(); i++) {
+
+                aux += linha.charAt(i);
+
+                // Caso o dado não termine na mesma linha
+                if (i == linha.length() - 1 && linha.charAt(i) != '\"') {
+                    linha = sc.nextLine();
+                    while (linha.length() == 0) //Caso a proxima linha seja apenas um espaço em branco encontrar uma linha que contenha alguma informção
+                        linha = sc.nextLine();
+                    i = -1;
+                } else {
+                    if (i < linha.length() - 2) //Não se deve fazer a proxima comparação caso o caractere seja o penultimo ou ultimo item da linha
+                        if (linha.charAt(i) == '\"' && linha.charAt(i + 1) == ',' && linha.charAt(i + 2) == '\"') { //Verifica é o fim de um atributo 
+                            quantAtributos++;
+                            if(quantAtributos==atributo){ //Caso o atributo seja o escolhido ao chamar função 
+                                if (tamMaiorString < aux.length()) {
+                                    maiorLinha = quantlinhas;
+                                    tamMaiorString = aux.length();
+                                }
+    
+                                gravarArq.printf("%s%n", quantlinhas + "." + aux.substring(1, aux.length()-1) );
+                            }
+                            
+                            aux = "";
+                            i += 1; //Pula o caractere ,
+                        }
+                }
+
+                if (i == linha.length() - 1 && atributo==25)
+                    gravarArq.printf("%s%n", quantlinhas + "." + aux.substring(1, aux.length()-1) );
+            }
+            aux = "";
+            quantAtributos = 0;
+            System.out.println(((quantlinhas * 100) / 1086964) + "%");
+
+        }
+        System.out.println("Tamanho da maior String: "+ (tamMaiorString-2)); //-2 para não contar com as aaspas no começo e final do atributo
+        System.out.println("Linha correspondente a maior string: "+ maiorLinha);
+        arq.close();       
     }
     // END ------------------
 }

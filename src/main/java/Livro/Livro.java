@@ -28,7 +28,6 @@ public class Livro implements Serializable {
     private String imprint; // selo
     private String isbn10; // ISBN-10
     private String isbn13; // ISBN-13
-    private String publisher; // editora
     private String title; // título
     private String publicationPlace; // *id do local de publicação do livro(os locas de publicação estão em places.csv)
 
@@ -65,7 +64,6 @@ public class Livro implements Serializable {
         this.imprint = preencheString(imprint, 0);
         this.isbn10 = preencheString(isbn10, 0);
         this.isbn13 = preencheString(isbn13, 0);
-        this.publisher = preencheString(publisher, 0);
         this.title = preencheString(title, 0);
         this.publicationPlace = preencheString(publicationPlace, 0);
         //========================
@@ -200,10 +198,6 @@ public class Livro implements Serializable {
 
     public String getPublicationPlace() {
         return publicationPlace;
-    }
-
-    public String getPublisher() {
-        return publisher;
     }
 
     public int getRank() {
