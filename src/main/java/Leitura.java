@@ -125,6 +125,9 @@ public class Leitura {
 
         int quantAtributos = 0;
         long quantlinhas = 0, tamMaiorString = 0, maiorLinha = 0;
+        
+        int progresso = 0, progressoAtual = 0;
+        System.out.println(progressoAtual + "%");
 
         PrintWriter gravarArq = new PrintWriter(arq);
 
@@ -167,15 +170,21 @@ public class Leitura {
             }
             aux = "";
             quantAtributos = 0;
-            System.out.println(((quantlinhas * 100) / 1086960) + "%");
+
+            progressoAtual = (int)(quantlinhas * 100) / 1086960; //imprimir progresso
+            if(progresso < progressoAtual){
+                progresso = progressoAtual;
+                System.out.println(progressoAtual + "%");
+            }
 
         }
-        System.out.println("Tamanho da maior String: "+ (tamMaiorString-2)); //-2 para não contar com as aaspas no começo e final do atributo
+        System.out.println("Tamanho da maior String: "+ (tamMaiorString-2)); //-2 para não contar com as aspas no começo e final do atributo
         System.out.println("Linha correspondente a maior string: "+ maiorLinha);
         gravarArq.printf("%s%n","Tamanho da maior String: "+ (tamMaiorString-2));
         gravarArq.printf("%s%n","Linha correspondente a maior string: "+ maiorLinha);
         
-        arq.close();       
+        arq.close();
+        sc.close();       
     }
     // END ------------------
 }

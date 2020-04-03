@@ -2,6 +2,7 @@ package Livro;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -97,7 +98,7 @@ public class Livro implements Serializable {
     }
 
     private List<String> preencheListaString(List<String> str, int tamMaxStr, int tamMaxList) {
-        List<String> aux = null;
+        List<String> aux = new ArrayList<>();
         if (str.size() >= tamMaxList) {
             for (int i = 0; i < tamMaxList; i++) {
                 aux.add(preencheString(str.get(i), tamMaxStr));//cria uma sublista do tamanho maximo passado
