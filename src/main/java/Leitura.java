@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 import Livro.Livro;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Leitura {
 
@@ -118,7 +119,7 @@ public class Leitura {
      * @return escreve no terminal o tamanho da maior string e a linha correspondente
      */
     public static void tamString(File file, String nomeArqSaida, int atributo) throws IOException {
-        Scanner sc = new Scanner(file);
+        BufferedReader  sc = new BufferedReader (new FileReader(file));
         FileWriter arq = new FileWriter("data/"+nomeArqSaida+".txt");
         String linha, aux = "";
 
@@ -127,11 +128,10 @@ public class Leitura {
 
         PrintWriter gravarArq = new PrintWriter(arq);
 
-        sc.nextLine(); // pular o cabeçalho
+        sc.readLine(); // pular o cabeçalho
 
-        while (sc.hasNextLine()) {
+        while ( (linha = sc.readLine())!=null ) {
 
-            linha = sc.nextLine();
             quantlinhas++;
 
             for (int i = 0; i < linha.length(); i++) {
@@ -140,9 +140,9 @@ public class Leitura {
 
                 // Caso o dado não termine na mesma linha
                 if (i == linha.length() - 1 && linha.charAt(i) != '\"') {
-                    linha = sc.nextLine();
+                    linha = sc.readLine();
                     while (linha.length() == 0) //Caso a proxima linha seja apenas um espaço em branco encontrar uma linha que contenha alguma informção
-                        linha = sc.nextLine();
+                        linha = sc.readLine();
                     i = -1;
                 } else {
                     if (i < linha.length() - 2) //Não se deve fazer a proxima comparação caso o caractere seja o penultimo ou ultimo item da linha
@@ -167,11 +167,14 @@ public class Leitura {
             }
             aux = "";
             quantAtributos = 0;
-            System.out.println(((quantlinhas * 100) / 1086964) + "%");
+            System.out.println(((quantlinhas * 100) / 1086960) + "%");
 
         }
         System.out.println("Tamanho da maior String: "+ (tamMaiorString-2)); //-2 para não contar com as aaspas no começo e final do atributo
         System.out.println("Linha correspondente a maior string: "+ maiorLinha);
+        gravarArq.printf("%s%n","Tamanho da maior String: "+ (tamMaiorString-2));
+        gravarArq.printf("%s%n","Linha correspondente a maior string: "+ maiorLinha);
+        
         arq.close();       
     }
     // END ------------------
