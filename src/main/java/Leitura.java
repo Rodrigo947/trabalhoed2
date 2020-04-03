@@ -131,7 +131,7 @@ public class Leitura {
 
         PrintWriter gravarArq = new PrintWriter(arq);
 
-        sc.readLine(); // pular o cabeçalho
+        //sc.readLine(); // pular o cabeçalho
 
         while ( (linha = sc.readLine())!=null ) {
 
