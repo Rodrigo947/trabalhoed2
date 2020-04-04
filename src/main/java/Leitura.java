@@ -121,7 +121,7 @@ public class Leitura {
     public static void tamString(File file, String nomeArqSaida, int atributo) throws IOException {
         BufferedReader  sc = new BufferedReader (new FileReader(file));
         FileWriter arq = new FileWriter("data/"+nomeArqSaida+".txt");
-        String linha, aux = "";
+        String linha, aux = "", description = "";
 
         int quantAtributos = 0;
         long quantlinhas = 0, tamMaiorString = 0, maiorLinha = 0;
@@ -131,7 +131,7 @@ public class Leitura {
 
         PrintWriter gravarArq = new PrintWriter(arq);
 
-        //sc.readLine(); // pular o cabeçalho
+        sc.readLine(); // pular o cabeçalho
 
         while ( (linha = sc.readLine())!=null ) {
 
@@ -150,18 +150,44 @@ public class Leitura {
                 } else {
                     if (i < linha.length() - 2) //Não se deve fazer a proxima comparação caso o caractere seja o penultimo ou ultimo item da linha
                         if (linha.charAt(i) == '\"' && linha.charAt(i + 1) == ',' && linha.charAt(i + 2) == '\"') { //Verifica é o fim de um atributo 
-                            quantAtributos++;
-                            if(quantAtributos==atributo){ //Caso o atributo seja o escolhido ao chamar função 
-                                if (tamMaiorString < aux.length()) {
-                                    maiorLinha = quantlinhas;
-                                    tamMaiorString = aux.length();
+                            if(aux.matches("\".*\"") || quantAtributos==3){ //
+                                
+                                quantAtributos++;
+                                //Existem registros que o atributo description possui "," no meio do dado o que invalida a divisão de atributos
+                                //portanto, só armazena description quando o proximo atributo for um número
+                                //com um devido padrão 
+                                if(quantAtributos==4){
+                                  
+                                    if (aux.matches(",\"[0-9]+.[0-9]+\"") || aux.matches(",\"\"")) {
+                                        i -= aux.length();
+                                        aux = description;
+                                        description = "";
+                                    }
+                                    else{
+                                        description += aux;
+                                        quantAtributos--;
+                                      
+                                    }
                                 }
-    
-                                gravarArq.printf("%s%n", quantlinhas + "." + aux.substring(1, aux.length()-1) );
-                            }
-                            
-                            aux = "";
-                            i += 1; //Pula o caractere ,
+
+                                if(quantAtributos==atributo && description.equals("")){ //Caso o atributo seja o escolhido ao chamar função 
+                                    
+                                    if (tamMaiorString < aux.length()) {
+                                        maiorLinha = quantlinhas;
+                                        tamMaiorString = aux.length();
+                                    }
+                                    
+                                    gravarArq.printf("%s%n", quantlinhas + "." + aux.substring(1, aux.length()-1) );
+                                }
+                                
+                                
+                                if(description.equals("")){
+                                    i += 1; //Pula o caractere ,
+                                }
+
+                                aux = "";
+                                    
+                            }                           
                         }
                 }
 
