@@ -33,6 +33,7 @@ public class Livro implements Serializable {
     private String publicationPlace; // *id do local de publicação do livro(os locas de publicação estão em places.csv)
     private String format; // * id do formato do livro(os formatos possiveis estão em formats.csv)
     private String lang; // vetor de idiomas do livro
+    private String url; // url relativa (https://bookdepository.com + url)
 
     private List<String> categorie; // * lista de ids de categorias de livros (os nomes das categorias estão em
                                     // categories.csv)
@@ -42,13 +43,13 @@ public class Livro implements Serializable {
     private Date indexDate; // data de indexação
     private Date publicationDate; // data de publicação
 
-    private URL url; // url relativa (https://bookdepository.com + url)
+    
 
     public Livro(int rank, int id, int ratingsAVG, int ratingsCount, float dimensionX, float dimensionY,
             float dimensionZ, float weight, String edition, String editionStatment, String description, String forAges,
             String illustrationNotes, String imprint, String isbn10, String isbn13, String publisher, String title,
             String publicationPlace, List<String> categorie, List<String> author, String format, String lang,
-            Date indexDate, Date publicationDate, URL url) {
+            Date indexDate, Date publicationDate, String url) {
         this.rank = rank;
         this.id = id;
         this.ratingsAVG = ratingsAVG;
@@ -60,28 +61,28 @@ public class Livro implements Serializable {
         this.weight = weight;
         // ========================
         this.edition = preencheString(edition, 56);
-        this.editionStatment = preencheString(editionStatment, 1434);
+        this.editionStatment = preencheString(editionStatment, 977);
         this.description = preencheString(description, 13088);
-        this.forAges = preencheString(forAges, 43);
-        this.illustrationsNote = preencheString(illustrationNotes, 0);
-        this.imprint = preencheString(imprint, 0);
-        this.isbn10 = preencheString(isbn10, 27);
-        this.isbn13 = preencheString(isbn13, 19);
-        this.title = preencheString(title, 334);
-        this.publicationPlace = preencheString(publicationPlace, 56);
-        this.format = preencheString(format, 0);
-        this.lang = preencheString(lang, 0);
+        this.forAges = preencheString(forAges, 5);
+        this.illustrationsNote = preencheString(illustrationNotes, 306);
+        this.imprint = preencheString(imprint, 87);
+        this.isbn10 = preencheString(isbn10, 13);
+        this.isbn13 = preencheString(isbn13, 13);
+        this.title = preencheString(title, 495);
+        this.publicationPlace = preencheString(publicationPlace, 4);
+        this.format = preencheString(format, 60);
+        this.lang = preencheString(lang, 3);
+        this.url = preencheString(url,334);
         // ========================
-        this.categorie = preencheListaString(categorie, 0, 0);
-        this.author = preencheListaString(author, 0, 0);
+        this.categorie = preencheListaString(categorie, 0, 90);
+        this.author = preencheListaString(author, 0, 70);
         // ========================
         this.indexDate = indexDate;
         this.publicationDate = publicationDate;
-        this.url = url;
+
     }
 
     public Livro() {
-
     }
 
     private String preencheString(String str, int tamMax) {
@@ -212,7 +213,7 @@ public class Livro implements Serializable {
         return ratingsCount;
     }
 
-    public URL getUrl() {
+    public String getUrl() {
         return url;
     }
 
