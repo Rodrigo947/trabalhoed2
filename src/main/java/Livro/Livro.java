@@ -1,7 +1,6 @@
 package Livro;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -72,14 +71,13 @@ public class Livro implements Serializable {
         this.publicationPlace = preencheString(publicationPlace, 4);
         this.format = preencheString(format, 60);
         this.lang = preencheString(lang, 3);
-        this.url = preencheString(url,334);
+        this.url = "https://bookdepository.com" + preencheString(url,334);
         // ========================
         this.categorie = preencheListaString(categorie, 80, 90);
         this.author = preencheListaString(author, 159, 70);
         // ========================
         this.indexDate = indexDate;
         this.publicationDate = publicationDate;
-
     }
 
     public Livro() {
