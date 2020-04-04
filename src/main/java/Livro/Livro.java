@@ -74,8 +74,8 @@ public class Livro implements Serializable {
         this.lang = preencheString(lang, 3);
         this.url = preencheString(url,334);
         // ========================
-        this.categorie = preencheListaString(categorie, 0, 90);
-        this.author = preencheListaString(author, 0, 70);
+        this.categorie = preencheListaString(categorie, 80, 90);
+        this.author = preencheListaString(author, 159, 70);
         // ========================
         this.indexDate = indexDate;
         this.publicationDate = publicationDate;
