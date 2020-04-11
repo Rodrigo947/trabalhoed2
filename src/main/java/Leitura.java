@@ -120,8 +120,8 @@ public class Leitura {
      */
     public static void datasetCSVtoOBJ(File file) throws IOException {
         BufferedReader sc = new BufferedReader(new FileReader(file));
-        //FileOutputStream  arqSaida = new FileOutputStream ("data/datasetOBJ.txt");
-        //ObjectOutputStream gravarObj = new ObjectOutputStream(arqSaida);
+        FileOutputStream  arqSaida = new FileOutputStream ("data/datasetOBJ.txt");
+        ObjectOutputStream gravarObj = new ObjectOutputStream(arqSaida);
         Livro livro = new Livro();
         Map<String,String> arrayHashMap = new HashMap<String,String>();
         String linha, aux = "", description = "", id = "", title = "", editionStatement = "";
@@ -139,9 +139,9 @@ public class Leitura {
         cabecalho[24] = cabecalho[24].substring(0, cabecalho[24].length()-2); //Retirar a ultima aspas duplas da linha
         //------END
 
-        /* while ((linha = sc.readLine()) != null) {*/
-           for (int r = 0; r < 50; r++) {
-                linha = sc.readLine();
+         while ((linha = sc.readLine()) != null) {
+           /*for (int r = 0; r < 50; r++) {
+                linha = sc.readLine();*/
             
             quantlinhas++;
 
@@ -260,12 +260,12 @@ public class Leitura {
             
             
             livro.preencheLivro(arrayHashMap);
-            FileOutputStream  arqSaida = new FileOutputStream ("objetos/"+quantlinhas+".txt");
-            ObjectOutputStream gravarObj = new ObjectOutputStream(arqSaida);
+            //FileOutputStream  arqSaida = new FileOutputStream ("objetos/"+quantlinhas+".txt");
+            //ObjectOutputStream gravarObj = new ObjectOutputStream(arqSaida);
             gravarObj.writeObject(livro);
             gravarObj.flush();
             gravarObj.reset();
-            arqSaida.close();
+            //arqSaida.close();
             
             progressoAtual = (int) (quantlinhas * 100) / 1086955; // imprimir progresso
             if (progresso < progressoAtual) {
@@ -276,7 +276,7 @@ public class Leitura {
         }
 
         
-        //arqSaida.close();
+        arqSaida.close();
         sc.close();
     }
     // END ------------------
