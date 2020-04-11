@@ -277,8 +277,5 @@ public class Livro implements Serializable {
     public float getWeight() {
         return weight;
     }
-    
-    public void setId(String t) {
-        this.authors = t;
-    }
+
 }

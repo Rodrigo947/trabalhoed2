@@ -9,3 +9,4 @@ data/*.csv
 data/*.bin
 data/*.txt
 .vscode
+objetos/*.txt
