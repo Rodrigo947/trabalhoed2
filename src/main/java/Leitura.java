@@ -139,9 +139,9 @@ public class Leitura {
         cabecalho[24] = cabecalho[24].substring(0, cabecalho[24].length()-2); //Retirar a ultima aspas duplas da linha
         //------END
 
-         while ((linha = sc.readLine()) != null) {
-           /*for (int r = 0; r < 10; r++) {
-                linha = sc.readLine();*/
+         /*while ((linha = sc.readLine()) != null) {*/
+           for (int r = 0; r < 50; r++) {
+                linha = sc.readLine();
             
             quantlinhas++;
 
@@ -258,11 +258,13 @@ public class Leitura {
             for (int j = 0; j < cabecalho.length; j++) 
                 arrayHashMap.put(cabecalho[j], AtributosFinais[j]);
             
+            
             livro.preencheLivro(arrayHashMap);
 
             gravarObj.writeObject(livro);
             gravarObj.flush();
             gravarObj.reset();
+           
             
             progressoAtual = (int) (quantlinhas * 100) / 1086955; // imprimir progresso
             if (progresso < progressoAtual) {
