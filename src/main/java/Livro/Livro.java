@@ -4,15 +4,13 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
  *
  */
-public class Livro implements Serializable {
+public class Livro implements Serializable,Cloneable {
     private int rank; // ranking na lista de mais vendidos
     private long id; // id único do livro atribuído pelo Bookdepository.com
     private float ratingsAVG; // avaliação média 0-5
@@ -98,43 +96,6 @@ public class Livro implements Serializable {
     }
 
    
-
-
-    private String preencheString(String str, int tamMax) {
-        if (str.length() > tamMax) {
-            return str.substring(0, tamMax);
-        } else{
-            if (str.length() < tamMax) {
-                String aux = new String();
-                aux = str;
-                for (int i = aux.length(); i < tamMax; i++) 
-                    aux = aux.concat("*");//preenche a string com "*" caso a string passada seja menor que o tamanho maximo
-                return aux;
-            }
-            else
-                return str;
-        } 
-    }
-
-    private List<String> preencheListaString(List<String> str, int tamMaxStr, int tamMaxList) {
-        List<String> aux = new ArrayList<>();
-        if (str.size() >= tamMaxList) {
-            for (int i = 0; i < tamMaxList; i++) {
-                aux.add(preencheString(str.get(i), tamMaxStr));//cria uma sublista do tamanho maximo passado
-            }
-            return aux;
-        } else {
-            for (int i = 0; i < tamMaxList; i++) {
-                String strAux = null;
-                if (i < str.size()) {
-                    aux.add(preencheString(str.get(i), tamMaxStr));
-                } else {
-                    aux.add(preencheString(strAux, tamMaxStr));//preenche a lista com strings cheias de "*" caso a 
-                }                                                                //lista passada seja menor que o tamanho maximo
-            }
-            return aux;
-        }
-    }
     /**
      * Trata valores nulos ou vazios para um atributo int,float,double, etc.
      * Pois a função Integer.parseInt, por exemplo, não funciona caso
@@ -277,5 +238,13 @@ public class Livro implements Serializable {
     public float getWeight() {
         return weight;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Object clone()throws CloneNotSupportedException{  
+        return super.clone();  
+    }  
 
 }
