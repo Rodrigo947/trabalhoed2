@@ -28,7 +28,7 @@ public class GerarArrays {
         
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
-        List posicoes = escolheNPosicoes(tam, seed, quantLinhas);
+        List<Integer> posicoes = escolheNPosicoes(tam, seed, quantLinhas);
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0;
         
@@ -53,6 +53,7 @@ public class GerarArrays {
                 oi.readObject();
             }
         }
+        oi.close();
         return titulos;
     }
     // END ------------------
@@ -70,7 +71,7 @@ public class GerarArrays {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
-        List posicoes = escolheNPosicoes(tam, seed, quantLinhas);//define um vetor com n posicoes
+        List<Integer> posicoes = escolheNPosicoes(tam, seed, quantLinhas);//define um vetor com n posicoes
         Livro[] livros = new Livro[tam];
         int progresso = 0, progressoAtual = 0;
 
@@ -94,6 +95,7 @@ public class GerarArrays {
                 oi.readObject();
             }
         }
+        oi.close();
         return livros;
     }
     // END ------------------
@@ -105,10 +107,10 @@ public class GerarArrays {
      * @param quantLinhas quantidade de linhas do arquivo
      * @return posições
      */
-    private List escolheNPosicoes(int tam, int seed, int quantLinhas) {
+    private List<Integer> escolheNPosicoes(int tam, int seed, int quantLinhas) {
         Random gerador = new Random();
         gerador.setSeed(seed);
-        List posicoes = new ArrayList();
+        List<Integer> posicoes = new ArrayList<>();
         for (int i = 0; i < tam; i++) {
             int aux = gerador.nextInt(quantLinhas);
             if (!posicoes.contains(aux)) {
