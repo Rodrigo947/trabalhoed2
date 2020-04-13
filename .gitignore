@@ -5,8 +5,9 @@ target/
 .settings/org.eclipse.core.resources.prefs
 .project
 .classpath
-data/*.csv
-data/*.bin
-data/*.txt
 .vscode
-objetos/*.txt
+data/dataset.csv
+data/datasetOBJ.txt
+data/quantLinhas.txt
+
+
