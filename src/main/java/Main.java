@@ -38,7 +38,7 @@ public class Main {
                     System.out.println(titulo);
                 }
                 //cria e imprime array de Livros
-                Livro[] livros = gerar.arrayLivros(tamanho, 2 * i, quantLinhas);
+                Livro[] livros = gerar.arrayLivros(tamanho, i*2, quantLinhas);
                 for (Livro livro : livros) {
                     System.out.println(livro.getId());
                 }
