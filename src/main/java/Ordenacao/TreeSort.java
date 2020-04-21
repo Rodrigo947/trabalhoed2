@@ -1,6 +1,7 @@
 package Ordenacao;
 
 import Livro.Livro;
+import java.io.FileWriter;
 
 public final class TreeSort {
 
@@ -23,21 +24,27 @@ public final class TreeSort {
     String tipo;
     int comparacoes;
     int copias;//?
+    int posicao;
     long tempoInicial;
     long tempoFinal;
+    FileWriter arq = new FileWriter("data/TreeSortOrdenado.txt");
 
     public <T> TreeSort(T array[]) throws Exception {
+
         if (array.length > 0) {
             this.comparacoes = 1;
             this.copias = 0;
             this.tempoInicial = System.currentTimeMillis();
-
+            this.posicao = 0;
+            
             if (array[0] instanceof String) {
                 comparacoes++;
                 this.tipo = "String";
             } else if (array[0] instanceof Livro) {
                 comparacoes++;
                 this.tipo = "Livro";
+            } else if (array[0] instanceof Integer) {
+                this.tipo = "Integer";
             } else {
                 this.tipo = null;
             }
@@ -45,11 +52,12 @@ public final class TreeSort {
             for (int i = 0; i < array.length; i++) {
                 insere(array[i]);
             }
-            ordenadoRec(this.raiz);
+            ordenadoRec(this.raiz, array);
             this.tempoFinal = System.currentTimeMillis() - this.tempoInicial;
-            System.out.println("Tempo de execucao: " + this.tempoFinal);
-            System.out.println("Numero de comparacoes: " + this.comparacoes);
+            arq.write("Tempo de execucao: " + this.tempoFinal);
+            arq.write("\nNumero de comparacoes: " + this.comparacoes);
         }
+        arq.close();
     }
 
     void insere(Object key) throws Exception {
@@ -74,21 +82,27 @@ public final class TreeSort {
         return raiz;
     }
 
-    private void ordenadoRec(No raiz) throws Exception {
+    private <T> void ordenadoRec(No raiz, T array[]) throws Exception {
 
         if (raiz != null) {
             comparacoes++;
-            ordenadoRec(raiz.esquerda);
+            ordenadoRec(raiz.esquerda, array);
+            comparacoes += 3;
             if (this.tipo.equals("String")) {
-                comparacoes++;
-                System.out.println(raiz.chave);
+                array[posicao] = (T)raiz.chave;
+                arq.write(array[posicao]+"\n");
+                posicao++;
             } else if (this.tipo.equals("Livro")) {
-                comparacoes++;
-                System.out.println(((Livro)raiz.chave).getTitle());
-            } else {
+                array[posicao] = (T)((Livro) raiz.chave);
+                arq.write(((Livro)array[posicao]).getTitle()+"\n");
+                posicao++;
+            } else if(this.tipo.equals("Integer")){
+                array[posicao] = (T)raiz.chave;
+                posicao++;
+            }else{
                 throw new Exception("Não é possível imprimir um objeto do tipo " + raiz.chave.getClass());
             }
-            ordenadoRec(raiz.direita);
+            ordenadoRec(raiz.direita, array);
         }
 
     }
@@ -106,17 +120,19 @@ public final class TreeSort {
      *
      * @param object1
      * @param object2
-     * @return -1 se object1 menor que object2, 0 se são iguais e 1 se object1 é
-     * maior que object2.
+     * @return maior que object2.
      * @throws Exception
      */
     public <T> int comparadorEspecial(T object1, T object2) throws Exception {
-        if (tipo.equals("String")) {
+        if (this.tipo.equals("String")) {
             comparacoes++;
             return ((String) object1).compareToIgnoreCase((String) object2);
-        } else if (tipo.equals("Livro")) {
+        } else if (this.tipo.equals("Livro")) {
             comparacoes++;
             return ((Livro) object1).getTitle().compareToIgnoreCase(((Livro) object2).getTitle());
+        } else if (this.tipo.equals("Integer")) {
+            comparacoes++;
+            return ((Integer) object1).compareTo((Integer) object2);
         } else {
             throw new Exception("Nao e possivel comparar os tipos " + object1.getClass() + " e " + object2.getClass());
         }

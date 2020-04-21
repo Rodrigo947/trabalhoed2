@@ -2,9 +2,7 @@
 import Livro.Livro;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import Ordenacao.*;
 import java.util.List;
 import java.util.Random;
 import java.io.FileInputStream;
@@ -31,13 +29,13 @@ public class GerarArrays {
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public String[] arrayTitulos(int tam, int seed, int quantLinhas) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public String[] arrayTitulos(int tam, int seed, int quantLinhas) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
-        System.out.println("teste");
-        List<Integer> posicoes = escolheNPosicoes(tam, seed, quantLinhas);
-        
+        Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
+        TreeSort sort = new TreeSort(posicoes);
+
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0;
 
@@ -46,7 +44,7 @@ public class GerarArrays {
         for (int i = 0, j = 0; i < quantLinhas && j < tam; i++) {
 
             //verifica se a posição atual foi selecionada
-            if (posicoes.contains(i) && j < tam) {
+            if (posicoes[j] == i) {
 
                 // imprimir progresso
                 progressoAtual = (int) (j * 100) / tam;
@@ -57,7 +55,6 @@ public class GerarArrays {
 
                 titulos[j] = ((Livro) oi.readObject()).getTitle();
                 j++;
-
             } else {
                 oi.readObject();
             }
@@ -79,11 +76,12 @@ public class GerarArrays {
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public Livro[] arrayLivros(int tam, int seed, int quantLinhas) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public Livro[] arrayLivros(int tam, int seed, int quantLinhas) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
-        List<Integer> posicoes = escolheNPosicoes(tam, seed, quantLinhas);//define um vetor com n posicoes
+        Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
+        TreeSort sort = new TreeSort(posicoes);
         Livro[] livros = new Livro[tam];
         int progresso = 0, progressoAtual = 0;
 
@@ -91,18 +89,20 @@ public class GerarArrays {
         for (int i = 0, j = 0; i < quantLinhas && j < tam; i++) {
 
             //verifica se a posição atual foi selecionada
-            if (posicoes.get(j)==i) {
+            if (j < tam && posicoes[j] == i ) {
+                while (j < tam && posicoes[j] == i) {
+                    
+                    // imprimir progresso
+                    progressoAtual = (int) (j * 100) / tam;
+                    if (progresso < progressoAtual) {
+                        progresso = progressoAtual;
+                        System.out.println(progressoAtual + "%");
+                    }
 
-                // imprimir progresso
-                progressoAtual = (int) (j * 100) / tam;
-                if (progresso < progressoAtual) {
-                    progresso = progressoAtual;
-                    System.out.println(progressoAtual + "%");
+                    livros[j] = (Livro) oi.readObject();
+                    j++;
+                    
                 }
-
-                livros[j] = (Livro) oi.readObject();
-                j++;
-
             } else {
                 oi.readObject();
             }
@@ -124,20 +124,15 @@ public class GerarArrays {
      * @param quantLinhas quantidade de linhas do arquivo
      * @return posições
      */
-    private List<Integer> escolheNPosicoes(int tam, int seed, int quantLinhas) {
+    private Integer[] escolheNPosicoes(int tam, int seed, int quantLinhas) {
         Random gerador = new Random();
         gerador.setSeed(seed);
-        List<Integer> posicoes = new ArrayList<>();
-        for (int i = 0; i < tam; i++) {
-            int aux = gerador.nextInt(quantLinhas);
-            if (!posicoes.contains(aux)) {
-                posicoes.add(aux);
-            } else {
-                i--;
-            }
+        Integer posicoes[] = new Integer[tam];
+        for (int i = 0; i < posicoes.length; i++) {
+            posicoes[i] = gerador.nextInt(quantLinhas);
         }
-        Collections.sort(posicoes);
         return posicoes;
     }
     // END ------------------
+
 }
