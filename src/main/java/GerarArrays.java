@@ -3,6 +3,8 @@ import Livro.Livro;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.io.FileInputStream;
@@ -33,7 +35,9 @@ public class GerarArrays {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
+        System.out.println("teste");
         List<Integer> posicoes = escolheNPosicoes(tam, seed, quantLinhas);
+        
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0;
 
@@ -87,7 +91,7 @@ public class GerarArrays {
         for (int i = 0, j = 0; i < quantLinhas && j < tam; i++) {
 
             //verifica se a posição atual foi selecionada
-            if (posicoes.contains(i)) {
+            if (posicoes.get(j)==i) {
 
                 // imprimir progresso
                 progressoAtual = (int) (j * 100) / tam;
@@ -132,6 +136,7 @@ public class GerarArrays {
                 i--;
             }
         }
+        Collections.sort(posicoes);
         return posicoes;
     }
     // END ------------------
