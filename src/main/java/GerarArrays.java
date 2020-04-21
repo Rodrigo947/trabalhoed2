@@ -3,6 +3,9 @@ import Livro.Livro;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import Ordenacao.*;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.io.FileInputStream;
@@ -81,15 +84,23 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
-        TreeSort sort = new TreeSort(posicoes);
+        //TreeSort sort = new TreeSort(posicoes);
         Livro[] livros = new Livro[tam];
-        int progresso = 0, progressoAtual = 0;
+        int progresso = 0, progressoAtual = 0, posicaoAtual;
 
         System.out.println("Construindo array de Livro com " + tam + " posicoes aleatorias...");
         for (int i = 0, j = 0; i < quantLinhas && j < tam; i++) {
-
+            
             //verifica se a posição atual foi selecionada
-            if (j < tam && posicoes[j] == i ) {
+            if(posicoes[j] == i){
+                livros[j] = (Livro) oi.readObject();
+                posicaoAtual = j;
+                j++;
+                    progressoAtual = (int) (j * 100) / tam;
+                    if (progresso < progressoAtual) {
+                        progresso = progressoAtual;
+                        System.out.println(progressoAtual + "%");
+                    }
                 while (j < tam && posicoes[j] == i) {
                     
                     // imprimir progresso
@@ -99,10 +110,11 @@ public class GerarArrays {
                         System.out.println(progressoAtual + "%");
                     }
 
-                    livros[j] = (Livro) oi.readObject();
+                    livros[j] = (Livro) livros[posicaoAtual].clone();
                     j++;
-                    
                 }
+                
+                    
             } else {
                 oi.readObject();
             }
@@ -128,9 +140,10 @@ public class GerarArrays {
         Random gerador = new Random();
         gerador.setSeed(seed);
         Integer posicoes[] = new Integer[tam];
-        for (int i = 0; i < posicoes.length; i++) {
+        for (int i = 0; i < tam; i++) {
             posicoes[i] = gerador.nextInt(quantLinhas);
         }
+        Arrays.sort(posicoes); //MUDAR PARA ALGUM METODO DE ORDENAÇAO IMPLEMENTADO NO TRABALHO
         return posicoes;
     }
     // END ------------------
