@@ -3,10 +3,6 @@ import Livro.Livro;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import Ordenacao.*;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,7 +36,7 @@ public class GerarArrays {
         TreeSort sort = new TreeSort(posicoes);
 
         String[] titulos = new String[tam];
-        int progresso = 0, progressoAtual = 0;
+        int progresso = 0, progressoAtual = 0, posicaoAtual;
 
         System.out.println("\nConstruindo array de titulos com " + tam + " posicoes aleatorias...");
 
@@ -48,16 +44,27 @@ public class GerarArrays {
 
             //verifica se a posição atual foi selecionada
             if (posicoes[j] == i) {
-
-                // imprimir progresso
+                titulos[j] = ((Livro) oi.readObject()).getTitle();
+                posicaoAtual = j;
+                j++;
                 progressoAtual = (int) (j * 100) / tam;
                 if (progresso < progressoAtual) {
                     progresso = progressoAtual;
                     System.out.println(progressoAtual + "%");
                 }
+                while (j < tam && posicoes[j] == i) {
 
-                titulos[j] = ((Livro) oi.readObject()).getTitle();
-                j++;
+                    // imprimir progresso
+                    progressoAtual = (int) (j * 100) / tam;
+                    if (progresso < progressoAtual) {
+                        progresso = progressoAtual;
+                        System.out.println(progressoAtual + "%");
+                    }
+
+                    titulos[j] = titulos[posicaoAtual];
+                    j++;
+                }
+
             } else {
                 oi.readObject();
             }
@@ -90,19 +97,19 @@ public class GerarArrays {
 
         System.out.println("Construindo array de Livro com " + tam + " posicoes aleatorias...");
         for (int i = 0, j = 0; i < quantLinhas && j < tam; i++) {
-            
+
             //verifica se a posição atual foi selecionada
-            if(posicoes[j] == i){
+            if (posicoes[j] == i) {
                 livros[j] = (Livro) oi.readObject();
                 posicaoAtual = j;
                 j++;
-                    progressoAtual = (int) (j * 100) / tam;
-                    if (progresso < progressoAtual) {
-                        progresso = progressoAtual;
-                        System.out.println(progressoAtual + "%");
-                    }
+                progressoAtual = (int) (j * 100) / tam;
+                if (progresso < progressoAtual) {
+                    progresso = progressoAtual;
+                    System.out.println(progressoAtual + "%");
+                }
                 while (j < tam && posicoes[j] == i) {
-                    
+
                     // imprimir progresso
                     progressoAtual = (int) (j * 100) / tam;
                     if (progresso < progressoAtual) {
@@ -113,8 +120,7 @@ public class GerarArrays {
                     livros[j] = (Livro) livros[posicaoAtual].clone();
                     j++;
                 }
-                
-                    
+
             } else {
                 oi.readObject();
             }

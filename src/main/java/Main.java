@@ -26,8 +26,8 @@ public class Main {
             GerarArrays gerar = new GerarArrays();
 
             //Exemplo para rodar um algoritmo de ordenação
-            Livro[] livros = gerar.arrayLivros(1000, 0, quantLinhas);
-            new TreeSort(livros);
+            String[] titulos = gerar.arrayTitulos(100000, 0, quantLinhas);
+            new TreeSort(titulos);
             //END------------
         }
 
