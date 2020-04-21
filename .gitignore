@@ -9,5 +9,7 @@ target/
 data/dataset.csv
 data/datasetOBJ.txt
 data/quantLinhas.txt
-
+nbactions.xml
+TreeSortOrdenado.txt
+tamanhos.txt
 
