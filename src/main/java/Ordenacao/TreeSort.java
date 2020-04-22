@@ -27,7 +27,7 @@ public final class TreeSort {
     int posicao;
     long tempoInicial;
     long tempoFinal;
-    FileWriter arq = new FileWriter("data/TreeSortOrdenado.txt");
+    FileWriter arq = new FileWriter("resultados/TreeSortOrdenado.txt");
 
     public <T> TreeSort(T array[]) throws Exception {
 
