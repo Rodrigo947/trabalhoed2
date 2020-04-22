@@ -27,16 +27,16 @@ public final class TreeSort {
     int posicao;
     long tempoInicial;
     long tempoFinal;
-    FileWriter arq = new FileWriter("resultados/TreeSortOrdenado.txt");
+    FileWriter arq;
 
-    public <T> TreeSort(T array[]) throws Exception {
-
+    public <T> TreeSort(T array[], int nomeArquivo) throws Exception {
+        arq = new FileWriter("resultados/TreeSort - " + nomeArquivo + ".txt");
         if (array.length > 0) {
             this.comparacoes = 1;
             this.copias = 0;
             this.tempoInicial = System.currentTimeMillis();
             this.posicao = 0;
-            
+
             if (array[0] instanceof String) {
                 comparacoes++;
                 this.tipo = "String";
@@ -89,17 +89,17 @@ public final class TreeSort {
             ordenadoRec(raiz.esquerda, array);
             comparacoes += 3;
             if (this.tipo.equals("String")) {
-                array[posicao] = (T)raiz.chave;
-                arq.write(array[posicao]+"\n");
+                array[posicao] = (T) raiz.chave;
+                arq.write(array[posicao] + "\n");
                 posicao++;
             } else if (this.tipo.equals("Livro")) {
-                array[posicao] = (T)((Livro) raiz.chave);
-                arq.write(((Livro)array[posicao]).getTitle()+"\n");
+                array[posicao] = (T) ((Livro) raiz.chave);
+                arq.write(((Livro) array[posicao]).getTitle() + "\n");
                 posicao++;
-            } else if(this.tipo.equals("Integer")){
-                array[posicao] = (T)raiz.chave;
+            } else if (this.tipo.equals("Integer")) {
+                array[posicao] = (T) raiz.chave;
                 posicao++;
-            }else{
+            } else {
                 throw new Exception("Não é possível imprimir um objeto do tipo " + raiz.chave.getClass());
             }
             ordenadoRec(raiz.direita, array);

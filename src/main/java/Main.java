@@ -9,7 +9,7 @@ import java.io.FileReader;
 public class Main {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, CloneNotSupportedException, Exception {
-        
+
         //Criando Arquivo de Objetos
         File datasetOBJ = new File("data/datasetOBJ.txt");
         File arqLinhas = new File("data/quantLinhas.txt");
@@ -19,18 +19,24 @@ public class Main {
             Leitura.datasetCSVtoOBJ(dataset);
         }
 
-        try ( BufferedReader tamanhos = new BufferedReader(new FileReader("data/entrada.txt")); 
-                BufferedReader fileQuantLinhas = new BufferedReader(new FileReader("data/quantLinhas.txt"))) {
-
+        try ( BufferedReader tamanhos = new BufferedReader(new FileReader("data/entrada.txt"));  BufferedReader fileQuantLinhas = new BufferedReader(new FileReader("data/quantLinhas.txt"))) {
+            int quantExecucoes = Integer.parseInt(tamanhos.readLine());
             int quantLinhas = Integer.parseInt(fileQuantLinhas.readLine()); //quantidade de linhas que possui o dataset
+            
             GerarArrays gerar = new GerarArrays();
-
-            //Exemplo para rodar um algoritmo de ordenação
-            String[] titulos = gerar.arrayTitulos(100000, 0, quantLinhas);
-            new TreeSort(titulos);
+            
+            for (int i = 0; i < quantExecucoes; i++ ) {
+                int tam = Integer.parseInt(tamanhos.readLine());
+                String[] titulos = gerar.arrayTitulos(tam, i+1, quantLinhas);
+                Livro[] livros = gerar.arrayLivros(tam, i+1, quantLinhas);
+                QuickSort quickSort = new QuickSort();
+                
+                quickSort.R_sort(titulos);
+                quickSort.R_sort((Comparable[]) livros);
+            }
             //END------------
         }
 
     }
-    
+
 }

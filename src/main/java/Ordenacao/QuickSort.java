@@ -24,7 +24,7 @@ class InsertSort<T extends Comparable<T>> implements Insert<T> {
     }
 }
 
-class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
+public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
 
     private T[] vet;
     //variaveis para QuickSort Recursivo

@@ -33,7 +33,7 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
-        TreeSort sort = new TreeSort(posicoes);
+        TreeSort sort = new TreeSort(posicoes, 0);
 
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
@@ -91,7 +91,7 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
-        TreeSort sort = new TreeSort(posicoes);
+        TreeSort sort = new TreeSort(posicoes, 0);
         Livro[] livros = new Livro[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
 
