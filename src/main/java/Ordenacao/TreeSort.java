@@ -1,7 +1,6 @@
 package Ordenacao;
 
 import Livro.Livro;
-import java.io.File;
 import java.io.FileWriter;
 
 public class TreeSort {
@@ -72,7 +71,7 @@ public class TreeSort {
             if (this.escreverInformacoes) {
                 informacoes.write("\nTreeSort - " + nomeArquivo);
                 informacoes.write("\nTempo de execucao: " + this.tempoFinal + " segundos");
-                informacoes.write("\nNumero de comparacoes: " + this.comparacoes + "\n");
+                informacoes.write("\nNumero de comparacoes: " + this.comparacoes);
                 informacoes.write("\nNumero de Copias: " + this.copias + "\n");
             }
         }
