@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import Ordenacao.*;
 import java.util.Random;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -33,7 +34,7 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
-        TreeSort sort = new TreeSort(posicoes, 0);
+        TreeSort sort = new TreeSort(posicoes, 0 + "", false, false, null);
 
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
@@ -91,7 +92,7 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Integer posicoes[] = escolheNPosicoes(tam, seed, quantLinhas);
-        TreeSort sort = new TreeSort(posicoes, 0);
+        TreeSort sort = new TreeSort(posicoes, 0 + "", false, false, null);
         Livro[] livros = new Livro[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
 
