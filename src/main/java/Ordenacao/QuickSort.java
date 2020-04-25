@@ -1,5 +1,7 @@
 package Ordenacao;
+
 import Livro.Livro;
+import java.io.*;
 
 class InsertSort<T extends Comparable<T>> implements Insert<T> {
 
@@ -8,92 +10,97 @@ class InsertSort<T extends Comparable<T>> implements Insert<T> {
     int QuickInsertion_record = 0; //cópia de registro QuickSort Inserção
 
     @Override
-    public void InsertionSort(T[] vet) {
-        for (int i = 1; i < vet.length; i++) {
+    public void InsertionSort(T[] array) {
+        for (int i = 1; i < array.length; i++) {
             int n = i;
 
-            while (n > 0 && vet[n - 1].compareTo(vet[n]) > 0) {
+            while (n > 0 && array[n - 1].compareTo(array[n]) > 0) {
                 QuickInsertion_record = QuickInsertion_record + 1;
                 QuickInsertion_key = QuickInsertion_key + 1;
-                T temp = vet[n];
-                vet[n] = vet[n - 1];
-                vet[n - 1] = temp;
+                T temp = array[n];
+                array[n] = array[n - 1];
+                array[n - 1] = temp;
                 n--;
             }
         }
     }
 }
 
-public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
+public class QuickSort {
 
-    private T[] vet;
     //variaveis para QuickSort Recursivo
     private int R_key = 0; //comparações de chaves recursivo
     private int R_record = 0;//cópia de registro recursivo
     //variaveis para QuickSort Mediana
     private int M_key = 0; //comparações de chaves mediana
     private int M_record = 0; //cópia de registro mediana
+    private static int seed = 0;
 
-    private void swap(int a, int b) {
-        T x = vet[a];
-        vet[a] = vet[b];
-        vet[b] = x;
+    public <T> QuickSort() throws Exception {
+        this.M_key = M_key;
+        this.M_record = M_record;
+        this.R_key = R_key;
+        this.R_record = R_record;
     }
 
-    private void M_Quicksort(int left, int right) {
+    public <T> int comparadorEspecial(T string1, T string2) {
+        if (string1 instanceof String) {
+            return ((String) string1).compareToIgnoreCase((String) string2);
+        } else {
+            return ((Livro) string1).getTitle().compareToIgnoreCase(((Livro) string2).getTitle());
+        }
+    }
+
+    public <T> void swap(int a, int b, T[] array) {
+        T x = array[a];
+        array[a] = array[b];
+        array[b] = x;
+    }
+
+    public <T> void M_Quicksort(int left, int right, T[] array) {
 
         if (left >= right) {
             M_key = M_key + 1;
             return;
         }
 
-        T pivot = vet[(right + left) / 2];
+        T pivo = array[(right + left) / 2];
 
         int i = left;
         int j = right;
 
         while (i <= j) {
             M_key = M_key + 1;
-            
-            
 
-            while (vet[i].compareTo(pivot) < 0) {
+            while (comparadorEspecial(array[i], pivo) < 0) {
                 M_key = M_key + 1;
                 i++;
             }
 
-            while (vet[j].compareTo(pivot) > 0) {
+            while (comparadorEspecial(array[j], pivo) > 0) {
                 M_key = M_key + 1;
                 j--;
             }
 
             if (i <= j) {
                 M_key = M_key + 1;
-                swap(i, j);
+                swap(i, j, array);
                 M_record = M_record + 1;
                 i++;
                 j--;
             }
         }
-        M_Quicksort(left, j);
-        M_Quicksort(i, right);
+        M_Quicksort(left, j, array);
+        M_Quicksort(i, right, array);
     }
 
-    public boolean isTypeLivro(T[] t) {
-        return t instanceof Livro[]; // verifica se o vetor passado é do tipo Livro
-    }
-
-    public boolean isTypeString(T[] t) {
-        return t instanceof String[]; // verifica se o vetor passado é do tipo String
-    }
-
-    private void R_Quicksort(int left, int right) {
-
+    public <T> void R_Quicksort(int left, int right, T[] array) {
         if (left >= right) {
             R_key = R_key + 1;
             return;
         }
-        T pivo = vet[left + (right - left) / 2];
+
+        T pivo = array[left + (right - left) / 2];
 
         int i = left;
         int j = right;
@@ -101,59 +108,292 @@ public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
         while (i <= j) {
             R_key = R_key + 1;
 
-            while (vet[i].compareTo(pivo) < 0) {
+            while (comparadorEspecial(array[i], pivo) < 0) {
                 R_key = R_key + 1;
                 i++;
             }
 
-            while (vet[j].compareTo(pivo) > 0) {
+            while (comparadorEspecial(array[j], pivo) > 0) {
                 R_key = R_key + 1;
                 j--;
             }
 
             if (i <= j) {
                 R_key = R_key + 1;
-                swap(i, j);
+                swap(i, j, array);
                 R_record = R_record + 1;
                 i++;
                 j--;
             }
         }
-        R_Quicksort(left, j);
-        R_Quicksort(i, right);
+        R_Quicksort(left, j, array);
+        R_Quicksort(i, right, array);
+    }
+
+    public <T> void WriteFileRecursivo(double time, int sizeArray, T[] array, int s) throws Exception {
+        System.out.println("seed: " + s);
+        if (s == 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortRecursivoString" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Recursivo String" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Recursivo:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortRecursivoObj" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Recursivo Objeto" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Recursivo:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+        if (s > 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortRecursivoString" + sizeArray + ".txt", true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("\n\n" + "QuickSort Recursivo String" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Recursivo:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortRecursivoObj" + sizeArray + ".txt", true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("\n\n" + "QuickSort Recursivo Objeto" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Recursivo:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+        System.out.println("SUCESS QuickSort Recursivo");
+    }
+
+    public <T> void WriteFileMediana(double time, int sizeArray, T[] array, int s) throws Exception {
+        if (s == 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortMedianaString" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Mediana String" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Mediana:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortMedianaObj" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Mediana Objeto" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Mediana:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+        if (s > 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortMedianaString" + sizeArray + ".txt", true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Mediana String" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Mediana:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortMedianaObj" + sizeArray + ".txt", true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                buffer.write("QuickSort Mediana Objeto" + "\n");
+                buffer.write("Seed: " + s + "\n");
+                buffer.write("Array de tamanho " + sizeArray + "\n");
+                buffer.write("Tempo de execução QuickSort Mediana:" + time + "\n");
+                buffer.write("Comparação de chaves: " + R_key + "\n");
+                buffer.write("Cópias de registro: " + R_record + "\n\n");
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+
+        System.out.println("SUCESS QuickSort Mediana");
+    }
+
+    public <T> void WriteFileQuickSortInsertion(double time, int sizeArray, T[] array, boolean state, int s) throws Exception {
+        InsertSort is = new InsertSort();
+        if (s == 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortInsertionString" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                if (state) {
+                    buffer.write("QuickSort Inserção String");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Inserção:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + is.QuickInsertion_key + "\n");
+                    buffer.write("Cópias de registro: " + is.QuickInsertion_record + "\n\n");
+                } else {
+                    buffer.write("QuickSort Recursivo String");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Recursivo:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + R_key + "\n");
+                    buffer.write("Cópias de registro: " + R_record + "\n\n");
+                }
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortInsertionObj" + sizeArray + ".txt");
+                BufferedWriter buffer = new BufferedWriter(arq);
+                if (state) {
+                    buffer.write("QuickSort Inserção Objeto");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Inserção:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + is.QuickInsertion_key + "\n");
+                    buffer.write("Cópias de registro: " + is.QuickInsertion_record + "\n\n");
+                } else {
+                    buffer.write("QuickSort Recursivo Objeto");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Recursivo:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + R_key + "\n");
+                    buffer.write("Cópias de registro: " + R_record + "\n\n");
+                }
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+        if (s > 1) {
+            if (array[0] instanceof String) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortInsertionString" + sizeArray + ".txt",true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                if (state) {
+                    buffer.write("QuickSort Inserção String");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Inserção:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + is.QuickInsertion_key + "\n");
+                    buffer.write("Cópias de registro: " + is.QuickInsertion_record + "\n\n");
+                } else {
+                    buffer.write("QuickSort Recursivo String");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Recursivo:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + R_key + "\n");
+                    buffer.write("Cópias de registro: " + R_record + "\n\n");
+                }
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write((String) array[i] + "\n");
+                }
+                buffer.close();
+            }
+            if (array[0] instanceof Livro) {
+                FileWriter arq = new FileWriter("data/resultados/QuickSortInsertionObj" + sizeArray + ".txt",true);
+                BufferedWriter buffer = new BufferedWriter(arq);
+                if (state) {
+                    buffer.write("QuickSort Inserção Objeto");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Inserção:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + is.QuickInsertion_key + "\n");
+                    buffer.write("Cópias de registro: " + is.QuickInsertion_record + "\n\n");
+                } else {
+                    buffer.write("QuickSort Recursivo Objeto");
+                    buffer.write("Seed: " + s + "\n");
+                    buffer.write("Array de tamanho " + sizeArray + "\n");
+                    buffer.write("Tempo de execução QuickSort: Recursivo:" + time + "\n");
+                    buffer.write("Comparação de chaves: " + R_key + "\n");
+                    buffer.write("Cópias de registro: " + R_record + "\n\n");
+                }
+                for (int i = 0; i < sizeArray; i++) {
+                    buffer.write(((Livro) array[i]).getTitle() + "\n");
+                }
+                buffer.close();
+            }
+        }
+        System.out.println("SUCESS QuickSort Inserção");
     }
 
     //sort recursivo
-    @Override
-    public void R_sort(T[] vet) {
-        this.vet = vet;
+    public <T> void R_sort(T[] array, int sizeArray) throws Exception {
         long startTime = System.currentTimeMillis();
-        R_Quicksort(0, vet.length - 1);
+        R_Quicksort(0, sizeArray - 1, array);
         long endTime = System.currentTimeMillis();
         double time = (endTime - startTime) / 1000.0;
-        System.out.println("Tempo de execução QuickSort Recursivo:" + time);
-        System.out.println("Comparação de chaves: " + R_key);
-        System.out.println("Cópias de registro: " + R_record + "\n");
+        seed = seed + 1;
+        WriteFileRecursivo(time, array.length, array, seed);
+        if (seed == 5) //quando acabar todas as seeds, zera e começa de novo
+        {
+            seed = 0;
+        }
         startTime = 0;
         endTime = 0;
         time = 0;
         R_key = 0;
         R_record = 0;
-
     }
 
     //sort mediana
-    @Override
-    public void M_sort(T[] vet) {
-        this.vet = vet;
-
+    public <T> void M_sort(T[] array, int sizeArray) throws Exception {
         long startTime = System.currentTimeMillis();
-        M_Quicksort(0, vet.length - 1);
+        M_Quicksort(0, sizeArray - 1, array);
         long endTime = System.currentTimeMillis();
         double time = (endTime - startTime) / 1000.0;
-        System.out.println("Tempo de execução QuickSort Mediana:" + time);
-        System.out.println("Comparação de chaves: " + M_key);
-        System.out.println("Cópias de registro: " + M_record + "\n");
+        seed = seed + 1;
+        WriteFileMediana(time, array.length, array, seed);
+        if (seed == 5) //quando acabar todas as seeds, zera e começa de novo
+        {
+            seed = 0;
+        }
         startTime = 0;
         endTime = 0;
         time = 0;
@@ -162,16 +402,18 @@ public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
 
     }
 
-    public void QuickSortInsert(T[] vet, int left, int right) {
+    public <T> void QuickSortInsert(T[] array, int left, int right) throws Exception {
         if (right - left < 10) {    //m = 10 , m = 100
             InsertSort is = new InsertSort();
             long startTime = System.currentTimeMillis();
-            is.InsertionSort(vet);
+            is.InsertionSort((Comparable[]) array);
             long endTime = System.currentTimeMillis();
             double time = (endTime - startTime) / 1000.0;
-            System.out.println("Tempo de execução QuickSort Inserção:" + time);
-            System.out.println("Comparação de chaves: " + is.QuickInsertion_key);
-            System.out.println("Cópias de registro: " + is.QuickInsertion_record + "\n");
+            seed = seed + 1;
+            WriteFileQuickSortInsertion(time, array.length, array, true, seed);
+            if (seed == 5) {
+                seed = 0;
+            }
             startTime = 0;
             endTime = 0;
             time = 0;
@@ -179,12 +421,14 @@ public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
             is.QuickInsertion_record = 0;
         } else {
             long startTime = System.currentTimeMillis();
-            R_sort(vet);
+            R_sort(array, array.length);
             long endTime = System.currentTimeMillis();
             double time = (endTime - startTime) / 1000.0;
-            System.out.println("Tempo de execução QuickSort Inserção:" + time);
-            System.out.println("Comparação de chaves: " + R_key); //mesmas variaveis do QuickSort recursivo
-            System.out.println("Cópias de registro: " + R_record + "\n");
+            seed = seed + 1;
+            WriteFileQuickSortInsertion(time, array.length, array, false, seed);
+            if (seed == 5) {
+                seed = 0;
+            }
             startTime = 0;
             endTime = 0;
             time = 0;
@@ -193,20 +437,7 @@ public class QuickSort<T extends Comparable<T>,Comparator> implements Sort<T> {
         }
     }
 
-    public void sort_QuickSortInsert(T[] vet) {
-        this.vet = vet;
-        QuickSortInsert(vet, 0, vet.length - 1);
-    }
-
-    public void printArrayObj(Livro[] vet, int tam) {
-        for (int i = 0; i < tam; i++) {
-            System.out.println(vet[i].getTitle());
-        }
-    }
-
-    public void printArrayString(String[] vet, int tam) {
-        for (int i = 0; i < tam; i++) {
-            System.out.println(vet[i]);
-        }
+    public <T> void sort_QuickSortInsert(T[] array, int sizeArray) throws Exception {
+        QuickSortInsert(array, 0, sizeArray - 1);
     }
 }
