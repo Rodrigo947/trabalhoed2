@@ -84,7 +84,7 @@ public class Main {
                 ////qSort.I_sort(stringsCopia, tam, seed, arqResultadosInsercao, imprimirVetor);
 
                 //Exemplo de chamada de função de ordenação
-                //Essa função está no final da classe "Tratamento"
+                //Essa função está no final da classe "ordenacaoTeste"
                 ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                
             }
