@@ -12,4 +12,5 @@ data/quantLinhas.txt
 nbactions.xml
 TreeSortOrdenado.txt
 tamanhos.txt
-
+data/arrays/*
+!.data/arrays/dummy

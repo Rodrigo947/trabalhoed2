@@ -160,7 +160,7 @@ public class Leitura {
 
             }
             
-            FileWriter  arqTamanhoLinhas = new FileWriter ("data/quantLinhas.txt");
+            FileWriter  arqTamanhoLinhas = new FileWriter ("data/quantDados.txt");
             arqTamanhoLinhas.write(Long.toString(quantlinhas));
             arqTamanhoLinhas.close();
         }

@@ -262,4 +262,15 @@ public class Tratamento {
         gravarArq.close();
     }
     // END ------------------
+
+    public static void funcaoTeste(String[] array,int tam,int seed, FileWriter resultado) throws IOException {
+        PrintWriter gravarArq = new PrintWriter(resultado);
+        System.out.println("Juntado arquivos de tamanho "+tam);
+        gravarArq.println("-----------SEED "+seed+"-----------");
+        for (int i = 0; i < tam; i++) {
+            gravarArq.println(array[i]);
+        }
+        gravarArq.println();
+    }
+
 }
