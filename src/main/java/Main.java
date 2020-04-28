@@ -125,12 +125,18 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
+                InsertionSort insertionSort = new InsertionSort(stringsCopia.length);
+                insertionSort.sortTitles(stringsCopia, seed);
                 ////iSort.funcao(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
+                MergeSort mergeSort = new MergeSort(stringsCopia.length);
+                mergeSort.sortTitles(stringsCopia, seed);
                 ////mSort.funcao(stringsCopia, tam, seed, arqResultMergeSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
+                HeapSort heapSort = new HeapSort(stringsCopia.length);
+                heapSort.sortTitles(stringsCopia, seed);
                 ////hSort.funcao(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
