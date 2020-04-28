@@ -17,7 +17,7 @@ public class Main {
         Livro[] livros;
         FileInputStream fileLivro,fileString;
 
-        //QuickSort qSort = new QuickSort();
+        ////QuickSort qSort = new QuickSort();
         
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
@@ -58,7 +58,7 @@ public class Main {
         String[] strings,stringsCopia;
         FileInputStream fileString;
         
-        //QuickSort qSort = new QuickSort();
+        ////QuickSort qSort = new QuickSort();
 
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
@@ -104,10 +104,10 @@ public class Main {
         String[] strings,stringsCopia;
         FileInputStream fileString;
 
-        //InsertionSort iSort = new InsertionSort();
-        //MergeSort mSort = new MergeSort();
-        //HeapSort hSort = new HeapSort();
-        //TreeSort tSort = new TreeSort();
+        ////InsertionSort iSort = new InsertionSort();
+        ////MergeSort mSort = new MergeSort();
+        ////HeapSort hSort = new HeapSort();
+        ////TreeSort tSort = new TreeSort();
 
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
