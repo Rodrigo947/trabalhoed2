@@ -10,7 +10,7 @@ import Ordenacao.*;
 
 public class Main {
 
-    public static void cenario1(BufferedReader entrada) throws Exception {
+    public static void cenario1(BufferedReader entrada, int imprimirVetor) throws Exception {
         int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
         int tam;
         String[] strings;
@@ -23,8 +23,10 @@ public class Main {
             tam = Integer.parseInt(entrada.readLine());
             if(tam<=100000){ //No cenario 1 são vetores de até 100.000 posições
                 //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-                FileWriter arqResultadosString = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt");
-                FileWriter arqResultadosLivros = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
+                ////FileWriter arqResultadosString = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt");
+                ////FileWriter arqResultadosLivros = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
+
+                FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
                 
                 for (int seed = 1; seed < 6; seed++) {
                     fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
@@ -33,21 +35,24 @@ public class Main {
                     fileLivro = new FileInputStream("data/arrays/"+tam+"/L_"+tam+"_"+seed+".txt");
                     livros = GerarArquivos.arqParaVetorLivros(fileLivro, tam); 
                     
-                    //qSort.R_sort(strings, tam, seed, arqResultadosString);
-                    //qSort.R_sort(livros, tam, seed, arqResultadosLivros);
+                    ////qSort.R_sort(strings, tam, seed, arqResultadosString, imprimirVetor);
+                    ////qSort.R_sort(livros, tam, seed, arqResultadosLivros, imprimirVetor);
 
                     //Exemplo de chamada de função de ordenação
-                    //Essa função apenas junta todos arquivos da seed definida
-                    Tratamento.funcaoTeste(strings, tam, seed, arqResultadosString);
+                    //Essa função está no final da classe "Tratamento"
+                    Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                 }
 
-                arqResultadosString.close();
-                arqResultadosLivros.close();
+                arqResultadosFuncaoTeste.close();
+
+                ////arqResultadosString.close();
+                ////arqResultadosLivros.close();
+                
             }
         }
     }
 
-    public static void cenario2(BufferedReader entrada) throws Exception {
+    public static void cenario2(BufferedReader entrada, int imprimirVetor) throws Exception {
         int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
         int tam;
         String[] strings,stringsCopia;
@@ -58,38 +63,42 @@ public class Main {
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
             //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-            FileWriter arqResultadosRecursivo = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt"); 
-            FileWriter arqResultadosMediana = new FileWriter("resultados/QuickSort/Mediana/S_" + tam + ".txt");
-            FileWriter arqResultadosInsercao = new FileWriter("resultados/QuickSort/Insercao/S_" + tam + ".txt");
+            ////FileWriter arqResultadosRecursivo = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt"); 
+            ////FileWriter arqResultadosMediana = new FileWriter("resultados/QuickSort/Mediana/S_" + tam + ".txt");
+            ////FileWriter arqResultadosInsercao = new FileWriter("resultados/QuickSort/Insercao/S_" + tam + ".txt");
+
+            FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
             
             for (int seed = 1; seed < 6; seed++) {
 
-                fileString = new FileInputStream("data/arrays/"+tam+"/L_"+tam+"_"+seed+".txt");
+                fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
                 strings = GerarArquivos.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
-                //qSort.R_sort(stringsCopia, tam, seed, arqResultadosRecursivo);
+                ////qSort.R_sort(stringsCopia, tam, seed, arqResultadosRecursivo, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                //qSort.M_sort(stringsCopia, tam, seed, arqResultadosMediana);
+                ////qSort.M_sort(stringsCopia, tam, seed, arqResultadosMediana, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                //qSort.I_sort(stringsCopia, tam, seed, arqResultadosInsercao);
+                ////qSort.I_sort(stringsCopia, tam, seed, arqResultadosInsercao, imprimirVetor);
 
                 //Exemplo de chamada de função de ordenação
-                //Essa função apenas junta todos arquivos da seed definida
-                Tratamento.funcaoTeste(strings, tam, seed, arqResultadosRecursivo);
+                //Essa função está no final da classe "Tratamento"
+                Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                
             }
 
-            arqResultadosRecursivo.close();
-            arqResultadosMediana.close();
-            arqResultadosInsercao.close();
+            arqResultadosFuncaoTeste.close();
+
+            ////arqResultadosRecursivo.close();
+            ////arqResultadosMediana.close();
+            ////arqResultadosInsercao.close();
             
         }
     }
 
-    public static void cenario3(BufferedReader entrada) throws Exception {
+    public static void cenario3(BufferedReader entrada, int imprimirVetor) throws Exception {
         int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
         int tam;
         String[] strings,stringsCopia;
@@ -103,38 +112,42 @@ public class Main {
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
             //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-            FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt"); 
-            FileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
-            FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
-            FileWriter arqResultTreeSort = new FileWriter("resultados/TreeSort/S_" + tam + ".txt");
+            ////FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt"); 
+            ////ileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
+            ////FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
+            ////FileWriter arqResultTreeSort = new FileWriter("resultados/TreeSort/S_" + tam + ".txt");
+
+            FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
             
             for (int seed = 1; seed < 6; seed++) {
 
-                fileString = new FileInputStream("data/arrays/"+tam+"/L_"+tam+"_"+seed+".txt");
+                fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
                 strings = GerarArquivos.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
-                //iSort.funcao(stringsCopia, tam, seed, arqResultInsertionSort);
+                ////iSort.funcao(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                //mSort.funcao(stringsCopia, tam, seed, arqResultMergeSort);
+                ////mSort.funcao(stringsCopia, tam, seed, arqResultMergeSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                //hSort.funcao(stringsCopia, tam, seed, arqResultHeapSort);
+                ////hSort.funcao(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                //tSort.funcao(stringsCopia, tam, seed, arqResultTreeSort);
+                ////tSort.funcao(stringsCopia, tam, seed, arqResultTreeSort, imprimirVetor);
 
                 //Exemplo de chamada de função de ordenação
-                //Essa função apenas junta todos arquivos da seed definida
-                Tratamento.funcaoTeste(strings, tam, seed, arqResultInsertionSort);
+                //Essa função está no final da classe "Tratamento"
+                Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                
             }
 
-            arqResultInsertionSort.close();
-            arqResultMergeSort.close();
-            arqResultHeapSort.close();
-            arqResultTreeSort.close();
+            arqResultadosFuncaoTeste.close();
+
+            ////arqResultInsertionSort.close();
+            ////arqResultMergeSort.close();
+            ////arqResultHeapSort.close();
+            ////arqResultTreeSort.close();
             
         }
     }
@@ -159,15 +172,21 @@ public class Main {
 
         switch (op) {
             case 1:
-                 cenario1(entrada);
+                 System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                 op = sc.nextInt();
+                 cenario1(entrada,op);
             break;
 
             case 2:
-                cenario2(entrada);
+                System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                op = sc.nextInt();
+                cenario2(entrada,op);
             break;
 
             case 3:
-                cenario3(entrada);
+                System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                op = sc.nextInt();
+                cenario3(entrada,op);
             break;
 
             case 4:
