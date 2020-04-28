@@ -30,17 +30,17 @@ public class Main {
                 
                 for (int seed = 1; seed < 6; seed++) {
                     fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
-                    strings = GerarArquivos.arqParaVetorString(fileString, tam); //gerando o array de acordo a partir do arquivo de acordo com a seed
+                    strings = GerarArrays.arqParaVetorString(fileString, tam); //gerando o array de acordo a partir do arquivo de acordo com a seed
 
                     fileLivro = new FileInputStream("data/arrays/"+tam+"/L_"+tam+"_"+seed+".txt");
-                    livros = GerarArquivos.arqParaVetorLivros(fileLivro, tam); 
+                    livros = GerarArrays.arqParaVetorLivros(fileLivro, tam); 
                     
                     ////qSort.R_sort(strings, tam, seed, arqResultadosString, imprimirVetor);
                     ////qSort.R_sort(livros, tam, seed, arqResultadosLivros, imprimirVetor);
 
                     //Exemplo de chamada de função de ordenação
-                    //Essa função está no final da classe "Tratamento"
-                    Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
+                    //Essa função está no final da classe "ordenacaoTeste"
+                    ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                 }
 
                 arqResultadosFuncaoTeste.close();
@@ -72,7 +72,7 @@ public class Main {
             for (int seed = 1; seed < 6; seed++) {
 
                 fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
-                strings = GerarArquivos.arqParaVetorString(fileString, tam);
+                strings = GerarArrays.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
                 ////qSort.R_sort(stringsCopia, tam, seed, arqResultadosRecursivo, imprimirVetor);
@@ -85,7 +85,7 @@ public class Main {
 
                 //Exemplo de chamada de função de ordenação
                 //Essa função está no final da classe "Tratamento"
-                Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
+                ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                
             }
 
@@ -122,7 +122,7 @@ public class Main {
             for (int seed = 1; seed < 6; seed++) {
 
                 fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
-                strings = GerarArquivos.arqParaVetorString(fileString, tam);
+                strings = GerarArrays.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
                 ////iSort.funcao(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
@@ -137,8 +137,8 @@ public class Main {
                 ////tSort.funcao(stringsCopia, tam, seed, arqResultTreeSort, imprimirVetor);
 
                 //Exemplo de chamada de função de ordenação
-                //Essa função está no final da classe "Tratamento"
-                Tratamento.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
+                //Essa função está no final da classe "ordenacaoTeste"
+                ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
                
             }
 

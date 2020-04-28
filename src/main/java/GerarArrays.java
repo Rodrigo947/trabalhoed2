@@ -1,12 +1,14 @@
 
 import Livro.Livro;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import Ordenacao.*;
 
 import java.util.Random;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 
 
@@ -161,6 +163,24 @@ public class GerarArrays {
         }
             
         return false; 
+    }
+
+    public static String[] arqParaVetorString(FileInputStream file, int tam) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(file));
+        String[] linhas = new String[tam];
+        for (int i = 0; i < tam; i++) {
+            linhas[i] = br.readLine();
+        }
+        return linhas;
+    }
+
+    public static Livro[] arqParaVetorLivros(FileInputStream file,int tam)throws ClassNotFoundException, IOException {
+        ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(file));
+        Livro[] livros = new Livro[tam];
+        for (int i = 0; i < tam; i++) 
+            livros[i] = (Livro) oi.readObject();
+        
+        return livros;
     }
 
     
