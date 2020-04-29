@@ -26,8 +26,8 @@ public class Main {
                 ////FileWriter arqResultadosLivros = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
 
                 //FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
-                FileWriter arqResultadosQuickSortString = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt");
-                FileWriter arqResultadosQuickSortObj = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
+                FileWriter arqResultadosQuickSortString = new FileWriter("resultados/QuickSort/cenario1/Recursivo/S_" + tam + ".txt");
+                FileWriter arqResultadosQuickSortObj = new FileWriter("resultados/QuickSort/cenario1/Recursivo/L_" + tam + ".txt");
                 
                 for (int seed = 1; seed < 6; seed++) {
                     fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
