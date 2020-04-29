@@ -35,8 +35,8 @@ public class QuickSort {
     private int M_key = 0; //comparações de chaves mediana
     private int M_copy = 0; //cópia de registro mediana
     //variaveis para QuickSort Insertion
-    private int QI_key = 0;
-    private int QI_copy = 0;
+    private int I_key = 0;
+    private int I_copy = 0;
 
     public <T> int comparadorEspecial(T string1, T string2) {
         if (string1 instanceof String) {
@@ -99,20 +99,20 @@ public class QuickSort {
         while (i <= j) {
             while (comparadorEspecial(array[i], pivo) < 0) {
                 R_key = R_key + 1;
-                QI_key = QI_key + 1;
+                I_key = I_key + 1;
                 i++;
             }
 
             while (comparadorEspecial(array[j], pivo) > 0) {
                 R_key = R_key + 1;
-                QI_key = QI_key + 1;
+                I_key = I_key + 1;
                 j--;
             }
 
             if (i <= j) {
                 swap(i, j, array);
                 R_copy = R_copy + 1;
-                QI_copy = QI_copy + 1;
+                I_copy = I_copy + 1;
                 i++;
                 j--;
             }
@@ -154,8 +154,8 @@ public class QuickSort {
         time = 0;
         R_key = 0;
         R_copy = 0;
-        QI_key = 0;
-        QI_copy = 0;
+        I_key = 0;
+        I_copy = 0;
     }
 
     //sort mediana
@@ -241,8 +241,8 @@ public class QuickSort {
             gravarArq.println("-------------QuickSort Inserção-------------");
             gravarArq.println("Array de tamanho " + tam);
             gravarArq.println("Seed: " + seed);
-            gravarArq.println("Comparação de chaves: " + QI_key);
-            gravarArq.println("Cópias de registro: " + QI_copy);
+            gravarArq.println("Comparação de chaves: " + I_key);
+            gravarArq.println("Cópias de registro: " + I_copy);
             gravarArq.println("Tempo de execução: " + time);
             if (imprimirVetor == 1) {
                 gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
@@ -258,8 +258,8 @@ public class QuickSort {
             startTime = 0;
             endTime = 0;
             time = 0;
-            QI_key = 0;
-            QI_copy = 0;
+            I_key = 0;
+            I_copy = 0;
             R_key = 0;
             R_copy = 0;
         }
