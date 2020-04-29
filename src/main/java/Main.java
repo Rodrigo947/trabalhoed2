@@ -57,7 +57,7 @@ public class Main {
         String[] strings,stringsCopia;
         FileInputStream fileString;
         
-        ////QuickSort qSort = new QuickSort();
+        QuickSort quicksort = new QuickSort();
 
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
@@ -66,7 +66,10 @@ public class Main {
             ////FileWriter arqResultadosMediana = new FileWriter("resultados/QuickSort/Mediana/S_" + tam + ".txt");
             ////FileWriter arqResultadosInsercao = new FileWriter("resultados/QuickSort/Insercao/S_" + tam + ".txt");
 
-            FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
+           // FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
+            FileWriter arqResultadosQuickSortRecursivo = new FileWriter("resultados/QuickSort/cenario2/Recursivo/S_" + tam + ".txt");
+            FileWriter arqResultadosQuickSortMediana = new FileWriter("resultados/QuickSort/cenario2/Mediana/S_" + tam + ".txt");
+            FileWriter arqResultadosQuickSortInsercao = new FileWriter("resultados/QuickSort/cenario2/Insercao/S_" + tam + ".txt");
             
             for (int seed = 1; seed < 6; seed++) {
 
@@ -74,21 +77,23 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
-                ////qSort.R_sort(stringsCopia, tam, seed, arqResultadosRecursivo, imprimirVetor);
+                quicksort.R_sort(stringsCopia, tam, seed, arqResultadosQuickSortRecursivo, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                ////qSort.M_sort(stringsCopia, tam, seed, arqResultadosMediana, imprimirVetor);
+                quicksort.M_sort(stringsCopia, tam, seed, arqResultadosQuickSortMediana, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                ////qSort.I_sort(stringsCopia, tam, seed, arqResultadosInsercao, imprimirVetor);
+                quicksort.I_sort(stringsCopia, tam, seed, arqResultadosQuickSortInsercao, imprimirVetor);
 
                 //Exemplo de chamada de função de ordenação
                 //Essa função está no final da classe "ordenacaoTeste"
-                ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
-               
+                //ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);   
             }
 
-            arqResultadosFuncaoTeste.close();
+           // arqResultadosFuncaoTeste.close();
+            arqResultadosQuickSortRecursivo.close();
+            arqResultadosQuickSortMediana.close();
+            arqResultadosQuickSortInsercao.close();
 
             ////arqResultadosRecursivo.close();
             ////arqResultadosMediana.close();
