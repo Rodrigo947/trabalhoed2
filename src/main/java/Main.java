@@ -16,8 +16,7 @@ public class Main {
         String[] strings;
         Livro[] livros;
         FileInputStream fileLivro,fileString;
-
-        ////QuickSort qSort = new QuickSort();
+        QuickSort quicksort = new QuickSort();
         
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
@@ -26,7 +25,9 @@ public class Main {
                 ////FileWriter arqResultadosString = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt");
                 ////FileWriter arqResultadosLivros = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
 
-                FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
+                //FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
+                FileWriter arqResultadosQuickSortString = new FileWriter("resultados/QuickSort/Recursivo/S_" + tam + ".txt");
+                FileWriter arqResultadosQuickSortObj = new FileWriter("resultados/QuickSort/Recursivo/L_" + tam + ".txt");
                 
                 for (int seed = 1; seed < 6; seed++) {
                     fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
@@ -34,19 +35,17 @@ public class Main {
 
                     fileLivro = new FileInputStream("data/arrays/"+tam+"/L_"+tam+"_"+seed+".txt");
                     livros = GerarArrays.arqParaVetorLivros(fileLivro, tam); 
-                    
-                    ////qSort.R_sort(strings, tam, seed, arqResultadosString, imprimirVetor);
-                    ////qSort.R_sort(livros, tam, seed, arqResultadosLivros, imprimirVetor);
 
                     //Exemplo de chamada de função de ordenação
                     //Essa função está no final da classe "ordenacaoTeste"
-                    ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
+                  //  ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
+                    quicksort.R_sort(strings, tam, seed, arqResultadosQuickSortString, imprimirVetor);
+                    quicksort.R_sort(livros, tam, seed, arqResultadosQuickSortObj, imprimirVetor);
                 }
 
-                arqResultadosFuncaoTeste.close();
-
-                ////arqResultadosString.close();
-                ////arqResultadosLivros.close();
+                //arqResultadosFuncaoTeste.close();
+                arqResultadosQuickSortString.close();
+                arqResultadosQuickSortObj.close();
                 
             }
         }
