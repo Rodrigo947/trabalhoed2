@@ -172,8 +172,8 @@ public class QuickSort {
         gravarArq.println("-------------QuickSort Mediana-------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
-        gravarArq.println("Comparação de chaves: " + R_key);
-        gravarArq.println("Cópias de registro: " + R_copy);
+        gravarArq.println("Comparação de chaves: " + M_key);
+        gravarArq.println("Cópias de registro: " + M_copy);
         gravarArq.println("Tempo de execução: " + time);
         if (imprimirVetor == 1) {
             gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
@@ -265,7 +265,7 @@ public class QuickSort {
         }
     }
 
-    public <T> void sort_QuickSortInsert(T[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
+    public <T> void I_sort(T[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
         QuickSortInsert(array, 0, tam - 1, tam, seed, resultado, imprimirVetor);
     }
 }
