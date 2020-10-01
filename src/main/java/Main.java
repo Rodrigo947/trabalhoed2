@@ -112,12 +112,9 @@ public class Main {
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
             //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-            ////FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt"); 
-            ////ileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
-            ////FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
-            ////FileWriter arqResultTreeSort = new FileWriter("resultados/TreeSort/S_" + tam + ".txt");
-
-            FileWriter arqResultadosFuncaoTeste = new FileWriter("resultados/funcaoTeste/S_" + tam + ".txt");
+            FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt"); 
+            FileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
+            FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
             
             for (int seed = 1; seed < 6; seed++) {
 
@@ -125,35 +122,18 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 
                 stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
-                InsertionSort insertionSort = new InsertionSort(stringsCopia.length);
-                insertionSort.sortTitles(stringsCopia, seed);
-                ////iSort.funcao(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
+                // InsertionSort.sort(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                MergeSort mergeSort = new MergeSort(stringsCopia.length);
-                mergeSort.sortTitles(stringsCopia, seed);
-                ////mSort.funcao(stringsCopia, tam, seed, arqResultMergeSort, imprimirVetor);
+                MergeSort.sort(stringsCopia, tam, seed, arqResultMergeSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
-                HeapSort heapSort = new HeapSort(stringsCopia.length);
-                heapSort.sortTitles(stringsCopia, seed);
-                ////hSort.funcao(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
-
-                stringsCopia = strings.clone();
-                ////tSort.funcao(stringsCopia, tam, seed, arqResultTreeSort, imprimirVetor);
-
-                //Exemplo de chamada de função de ordenação
-                //Essa função está no final da classe "ordenacaoTeste"
-                ordenacaoTeste.funcaoTeste(strings, tam, seed, arqResultadosFuncaoTeste, imprimirVetor);
-               
+                // HeapSort.sort(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
             }
 
-            arqResultadosFuncaoTeste.close();
-
-            ////arqResultInsertionSort.close();
-            ////arqResultMergeSort.close();
-            ////arqResultHeapSort.close();
-            ////arqResultTreeSort.close();
+            arqResultInsertionSort.close();
+            arqResultMergeSort.close();
+            arqResultHeapSort.close();
             
         }
     }

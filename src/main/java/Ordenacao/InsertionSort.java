@@ -6,56 +6,52 @@ import java.io.PrintWriter;
 
 public class InsertionSort {
 
-    private long qtdComparacoes = 0;
-    private long qtdCopias = 0;
-
-    private FileWriter arq;
-    private PrintWriter writer;
-
-    public InsertionSort(int tam) throws IOException {
-        arq = new FileWriter("resultados/Insertion Sort/S_" + tam + ".txt");
-        writer = new PrintWriter(arq);
-
-        writer.println("Insertion Sort:");
-        writer.println("Array de tamanho: " + tam + "\n");
-    }
-
-    public void sortTitles(String[] array, int seed) {
-        writer.println("Seed: " + seed);
-
-        qtdComparacoes = 0;
-        qtdCopias = 0;
+    public static void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws IOException {
+        PrintWriter gravarArq = new PrintWriter(resultado);
+        System.out.println("Executando o InsertionSort...");
+        System.out.println("Array: "+tam+" Seed: "+seed);
+        
+        long key = 0, copys = 0;
+        double time = 0;
 
         long initialTime = System.currentTimeMillis();
 
         for (int i = 1; i < array.length; i++) {
             int n = i;
-            qtdComparacoes++;
+            key++;
 
             while (n > 0 && array[n - 1].compareTo(array[n]) > 0) {
                 if (array[n - 1].compareTo(array[n]) > 0) {
-                    qtdComparacoes++;
+                    key++;
                 }
                 String temp = array[n];
                 array[n] = array[n - 1];
                 array[n - 1] = temp;
                 n--;
-                qtdCopias++;
+                copys++;
             }
         }
 
         long finalTime = System.currentTimeMillis();
 
-        // Escrever os resultados
-        writer.println("Quantidade de Comparações: " + qtdComparacoes);
-        writer.println("Quantidade de Cópias: " + qtdCopias);
+        time = ((finalTime - initialTime) / 1000.0);
 
-        double resultTime = (finalTime - initialTime) / 1000.0;
-        writer.println("Tempo de execução: " + resultTime + "s\n");
+        gravarArq.println("------------- Insertion Sort -------------");
+        gravarArq.println("Array de tamanho " + tam);
+        gravarArq.println("Seed: " + seed);
+        gravarArq.println("Comparação de chaves: " + key);
+        gravarArq.println("Cópias de registro: " + copys);
+        gravarArq.println("Tempo de execução: " + time + "s");
+        if (imprimirVetor == 1) {
+            gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
+            for (int i = 0; i < tam; i++) {
+                gravarArq.println(array[i]);
+            }
+            gravarArq.println();
+        }
+        gravarArq.println("\n");
+
+        System.out.println("Finalizado \n");
     }
-
-    public void closeFile() throws IOException {
-        arq.close();
-    }
-
+    
 }

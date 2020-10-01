@@ -13,4 +13,5 @@ nbactions.xml
 TreeSortOrdenado.txt
 tamanhos.txt
 data/arrays/*
+resultados/*
 !.data/arrays/dummy
