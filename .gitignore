@@ -6,6 +6,7 @@ target/
 .project
 .classpath
 .vscode
+.DS_Store
 nbactions.xml
 
 data/arrays/*
