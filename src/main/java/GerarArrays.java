@@ -14,19 +14,13 @@ import java.io.ObjectInputStream;
 
 public class GerarArrays {
 
-    long tempoInicial;
-    long tempoFinal;
-
-    public GerarArrays() {
-        this.tempoInicial = System.currentTimeMillis();
-        this.tempoFinal = 0;
-    }
 
     /**
-     * cria um array de titulos aleatórios
+     * Cria um vetor do tipo string de titulos aleatórios
      *
      * @param tam tamanho da lista
-     * @param quantDados quantidade de linhas do arquivo
+     * @param quantDados quantidade de registros do arquivo dataset.csv
+     * @param posicoes vetor de posicoes escolhidas aleatoriamente
      * @return array de títulos aleatórios
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
@@ -38,7 +32,7 @@ public class GerarArrays {
         String[] titulos = new String[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
 
-        System.out.println("\nConstruindo array de titulos com " + tam + " posicoes aleatorias...");
+        System.out.println("\nConstruindo array de STRING titulos com " + tam + " posicoes aleatorias...");
 
         for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
 
@@ -70,18 +64,17 @@ public class GerarArrays {
             }
         }
         oi.close();
-        this.tempoFinal = System.currentTimeMillis() - this.tempoInicial;
-        System.out.println("tempo de execucao arrayTitulos: " + tempoFinal);
+        fi.close();
         return titulos;
     }
     // END ------------------
 
     /**
-     * cria um array de livros aleatórios
+     * Cria um vetor do tipo livro com objetos aleatórios
      *
      * @param tam tamanho da lista
      * @param quantDados quantidade de dados do arquivo
-     * @return array de livros aleatórios
+     * @param posicoes vetor de posicoes escolhidas aleatoriamente
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
@@ -92,7 +85,7 @@ public class GerarArrays {
         Livro[] livros = new Livro[tam];
         int progresso = 0, progressoAtual = 0, posicaoAtual;
 
-        System.out.println("Construindo array de Livro com " + tam + " posicoes aleatorias...");
+        System.out.println("Construindo array de OBJETOS Livro com " + tam + " posicoes aleatorias...");
         for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
 
             //verifica se a posição atual foi selecionada
@@ -123,21 +116,19 @@ public class GerarArrays {
             }
         }
         oi.close();
-        this.tempoFinal = System.currentTimeMillis() - this.tempoInicial;
-        System.out.println("tempo de execucao arrayLivros: " + tempoFinal);
 
         return livros;
     }
     // END ------------------
 
     /**
-     * gera uma lista de n posições aleatórias entre 0 e a quantidade de dados
-     * passada como parametro
+     * Gera uma lista ordenada de n posições aleatórias unicas entre 0 e a quantidade de dados
+     * do dataset passada como parametro 
      *
      * @param tam        tamanho da lista
      * @param seed       semente para gerar numeros aleatorios
      * @param quantDados quantidade de dados do arquivo
-     * @return posições
+     * @return vetor de posições
      * @throws Exception
      */
     public Integer[] escolheNPosicoes(int tam, int seed, int quantDados) throws Exception {
@@ -146,9 +137,9 @@ public class GerarArrays {
         gerador.setSeed(seed);
         Integer posicoes[] = new Integer[tam];
         for (int i = 0; i < tam; i++) {
-            n=gerador.nextInt(quantDados);
+            n = gerador.nextInt(quantDados);
             while( contains(posicoes,n,i) )
-                n=gerador.nextInt(quantDados);
+                n = gerador.nextInt(quantDados);
             posicoes[i]=n;
         }
         new TreeSort(posicoes, 0 + "", false, false, null);
@@ -156,6 +147,13 @@ public class GerarArrays {
     }
     // END ------------------
 
+    /**
+     * Verifica se o valor v está contido no array
+     * @param array array de pesquisa
+     * @param v valor a ser procurado
+     * @param tam tamnho do array
+     * @return
+     */
     private static boolean contains(Integer[] array, int v, int tam){
         for (int j = 0; j < tam; j++) {
             if(array[j] == v)
@@ -165,6 +163,13 @@ public class GerarArrays {
         return false; 
     }
 
+    /**
+     * Gera um vetor de strings a partir de um arquivo do tipo S_tamanho_seed.txt
+     * @param file arquivo a ser lido
+     * @param tam tamanho do vetor gerado
+     * @return vetor de strings
+     * @throws IOException
+     */
     public static String[] arqParaVetorString(FileInputStream file, int tam) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(file));
         String[] linhas = new String[tam];
@@ -174,7 +179,14 @@ public class GerarArrays {
         return linhas;
     }
 
-    public static Livro[] arqParaVetorLivros(FileInputStream file,int tam)throws ClassNotFoundException, IOException {
+    /**
+     * Gera um vetor de objetos Livro a partir de um arquivo do tipo L_tamanho_seed.txt
+     * @param file arquivo a ser lido
+     * @param tam tamanho do vetor gerado
+     * @return vetor de objetos Livro
+     * @throws IOException
+     */
+    public static Livro[] arqParaVetorLivros(FileInputStream file, int tam)throws ClassNotFoundException, IOException {
         ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(file));
         Livro[] livros = new Livro[tam];
         for (int i = 0; i < tam; i++) 

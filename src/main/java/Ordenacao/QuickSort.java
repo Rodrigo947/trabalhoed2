@@ -141,7 +141,12 @@ public class QuickSort {
         if (imprimirVetor == 1) {
             gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
             for (int i = 0; i < tam; i++) {
-                gravarArq.println(array[i]);
+                if(array instanceof String[]){
+                    gravarArq.println(array[i]);
+                }
+                else{
+                    gravarArq.println( ((Livro) array[i]).getTitle());
+                }
             }
             gravarArq.println();
         }
@@ -180,7 +185,7 @@ public class QuickSort {
             for (int i = 0; i < tam; i++) {
                 gravarArq.println(array[i]);
             }
-            gravarArq.println();
+            
         }
         gravarArq.println("\n");
 

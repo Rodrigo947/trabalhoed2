@@ -14,13 +14,13 @@ import Livro.Livro;
 public class Leitura {
 
     /**
-     * A partir do arquivo dataset a função retorna um arquivo com os objetos para
-     * cada dado encontrado
+     * A partir do arquivo dataset, a função lê todos os registros
+     * e os separa em objetos para que sejam colocados em um arquivo
+     * chamado datasetOBJ.txt. Além disso, cria um arquivo quantDados.txt
+     * que possui apenas a quantidade de registros do dataset
      *
-     * @param file arquivo dataset
+     * @param file arquivo dataset.csv contido na pasta data
      *
-     * @return escreve no terminal o tamanho da maior string e a linha
-     *         correspondente
      * @throws java.io.IOException
      */
     public static void datasetCSVtoOBJ(File file) throws IOException {
@@ -125,9 +125,9 @@ public class Leitura {
                                     if (description.equals("") && title.equals("") && editionStatement.equals("")) 
                                         AtributosFinais[quantAtributos - 1] = aux.substring(1, aux.length() - 1);
                                     
-                                    if (description.equals("") && title.equals("") && editionStatement.equals("")) {
+                                    if (description.equals("") && title.equals("") && editionStatement.equals("")) 
                                         i += 1; // Pula o caractere ,
-                                    }
+                                    
                                     aux = "";
 
                                 }
@@ -135,17 +135,17 @@ public class Leitura {
                         }
                     }
 
-                    if (i == linha.length() - 1) {
+                    if (i == linha.length() - 1) 
                         AtributosFinais[24] = aux.substring(1, aux.length() - 1);
-                    }
+                    
 
                 }
                 aux = "";
                 quantAtributos = 0;
 
-                for (int j = 0; j < cabecalho.length; j++) {
+                for (int j = 0; j < cabecalho.length; j++) 
                     arrayHashMap.put(cabecalho[j], AtributosFinais[j]);
-                }
+                
 
                 livro.preencheLivro(arrayHashMap);
                 gravarObj.writeObject(livro);
@@ -163,6 +163,9 @@ public class Leitura {
             FileWriter  arqTamanhoLinhas = new FileWriter ("data/quantDados.txt");
             arqTamanhoLinhas.write(Long.toString(quantlinhas));
             arqTamanhoLinhas.close();
+            gravarObj.close();
+            sc.close();
+            arqSaida.close();
         }
 
 
