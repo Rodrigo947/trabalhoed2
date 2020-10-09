@@ -2,6 +2,9 @@ package Ordenacao;
 
 import Livro.Livro;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 class InsertSort<T extends Comparable<T>> implements Insert<T> {
 
@@ -52,13 +55,70 @@ public class QuickSort {
         array[b] = x;
     }
 
-    public <T> void M_Quicksort(int left, int right, T[] array) {
+
+    <T> int definePivo(int left, int right,T[] array, int k){
+        int indexRandom;
+        int posicao = (right + left) / 2;
+        int tamVetor = right - left + 1;
+        Random r = new Random();
+        String[] valEscolhidosOrdenados = new String[k];
+        Map <Integer,T> valEscolhidosBackup = new HashMap<Integer,T>();
+        
+        if(k <= tamVetor){
+            
+            valEscolhidosBackup.put(left, array[left]); // Primeiro
+            valEscolhidosBackup.put(right, array[right]); //Ultimo
+            valEscolhidosBackup.put( (tamVetor / 2) + left, array[ (tamVetor / 2) + left ] ); //Meio
+
+            //Escolhe mais k-3 posições randomicas para fazer a mediana
+            for (int i = 0; i < k-3; i++) {
+                indexRandom = r.nextInt(right - left) + left;
+                while(valEscolhidosBackup.containsKey(indexRandom))
+                    indexRandom = r.nextInt(right - left) + left;
+                valEscolhidosBackup.put(indexRandom, array[indexRandom]);
+            }
+
+            //Faz uma copia par um vetor de string a ser ordenado
+            int m = 0;
+            for (int key : valEscolhidosBackup.keySet()) {
+                if(valEscolhidosBackup.get(key) instanceof String)
+                    valEscolhidosOrdenados[m] = (String) valEscolhidosBackup.get(key);
+                else
+                    valEscolhidosOrdenados[m] = ((Livro) valEscolhidosBackup.get(key)).getTitle();
+                m++;
+            }
+
+            //Ordena o vetor e pega o elemento do meio
+            R_Quicksort(0, k - 1, valEscolhidosOrdenados);
+            String pivoEscolhido = valEscolhidosOrdenados[k/2];
+            
+            //Procura qual a posição correspondente do pivo escolhido
+            for (int key : valEscolhidosBackup.keySet()) {
+                if(valEscolhidosBackup.get(key) instanceof String){
+                    if(pivoEscolhido == (String) valEscolhidosBackup.get(key)) {
+                        posicao = key;
+                        break;
+                    }
+                }
+                else{
+                    if( pivoEscolhido == ((Livro) valEscolhidosBackup.get(key)).getTitle() ) {
+                        posicao = key;
+                        break;
+                    }
+                }
+            }
+
+        }
+        return posicao;
+    }
+
+    public <T> void M_Quicksort(int left, int right, T[] array, int k) {
 
         if (left >= right) {
             return;
         }
 
-        T pivo = array[(right + left) / 2];
+        T pivo = array[ definePivo(left,right,array,k) ];
 
         int i = left;
         int j = right;
@@ -82,8 +142,8 @@ public class QuickSort {
                 j--;
             }
         }
-        M_Quicksort(left, j, array);
-        M_Quicksort(i, right, array);
+        M_Quicksort(left, j, array, k);
+        M_Quicksort(i, right, array, k);
     }
 
     public <T> void R_Quicksort(int left, int right, T[] array) {
@@ -166,7 +226,7 @@ public class QuickSort {
     //sort mediana
     public <T> void M_sort(T[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
         long startTime = System.currentTimeMillis();
-        M_Quicksort(0, tam - 1, array);
+        M_Quicksort(0, tam - 1, array,3); // k=3 ou k=5
         long endTime = System.currentTimeMillis();
         double time = (endTime - startTime) / 1000.0;
 
