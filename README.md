@@ -1,7 +1,7 @@
 # Trabalho de Estrutura de Dados 2
 
 ## Execução
-**1.** Baixe e instale o JDK 14 ou acima do Java: 
+**1.** Baixe e instale o Java JDK 14 ou acima: 
 
 **Windows:** https://adoptopenjdk.net/?variant=openjdk15&jvmVariant=hotspot 
 
