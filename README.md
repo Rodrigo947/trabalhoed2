@@ -49,7 +49,7 @@ O arquivo gerado está em `data/datasetOBJ.txt`.
 
 A partir do arquivo `data/entrada.txt`, essa opção gera os arquivos de arrays aleatórios que serão usados por cada cenário e os guarda na pasta `data/arrays/`. Uma pasta é criada para cada tamanho de vetor e o nome de dos arquivos seguem o seguinte padrão: **tipoDeArray_tamanhoDoArray_seed.txt**
 
-**OBS.: A geração desses arquivos podem demorar muito tempo portanto, caso queira pular esses passos, faça o download de toda a pasta `data` no seguinte link:** https://drive.google.com/file/d/1WZo9tnTyR2zY-Ii5ScGUXF2YFg0Otx7V/view?usp=sharing
+**OBS.: A geração desses arquivos podem demorar muito tempo portanto, caso queira pular a execução das opções 4 e 5, faça o download de toda a pasta `data` no seguinte link:** https://drive.google.com/file/d/1WZo9tnTyR2zY-Ii5ScGUXF2YFg0Otx7V/view?usp=sharing
 
 ### Cenários
 
