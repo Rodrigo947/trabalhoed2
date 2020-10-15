@@ -134,7 +134,7 @@ public class Main {
             System.out.println("4-Gerar Arquivo de Objetos");
             System.out.println("5-Gerar Arquivos de Arrays");
             System.out.println("0-Sair");
-            System.out.print("Opção: ");
+            System.out.print("Opcao: ");
             op = sc.nextInt();
 
             switch (op) {
