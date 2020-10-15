@@ -5,7 +5,7 @@
 
 **Windows:** https://adoptopenjdk.net/?variant=openjdk15&jvmVariant=hotspot 
 
-**Linux:** sudo apt install openjdk-14-jre-headless
+**Linux:** `$ sudo apt install openjdk-14-jre-headles`
 
 **2.** Clone o repositório do projeto do github https://github.com/Rodrigo947/trabalhoed2.
 
