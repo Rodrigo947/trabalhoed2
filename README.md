@@ -1,5 +1,13 @@
 # Trabalho de Estrutura de Dados 2
 
+## Compilação e execução
+Clone o repositório do projeto no github https://github.com/Rodrigo947/trabalhoed2.
+
+```bash
+$ git clone https://github.com/Rodrigo947/trabalhoed2
+```
+
+
 ## Arquivos
 
 **Dataset:** https://drive.google.com/file/d/1Wg6pAx5sjdSS8M-9UNIEQPQiy_dS4Fzb/view?usp=sharing
