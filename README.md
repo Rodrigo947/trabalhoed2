@@ -78,3 +78,14 @@ resultados/TreeSort
 ```
 ## Descrição das Classes 
 
+| Nome da Classe | Descrição   |
+| -------------- | ----------- |
+| Livro          | Definição do objeto Livro com todos os seus atributos                                                                      |
+| GerarArquivos  | Classe responável por gerar o arquivo ``datasetOBJ.txt`` e os arquivos de arrays                                           |
+| GerarArrays    | A partir do ``datasetOBJ.txt`` gera arrays aleatórios além de ler os arquivos de arrays                                    |
+| Leitura        | Responsável pelo pré processamento do dataset                                                                              |
+| HeapSort       | Implementação de todas as funções necessárias para executar a ordenação do tipo Heap Sort                                  |
+| InsertionSort  | Implementação de todas as funções necessárias para executar a ordenação do tipo Insertion Sort                             |
+| MergeSort      | Implementação de todas as funções necessárias para executar a ordenação do tipo Merge Sort                                 |
+| TreeSort       | Implementação de todas as funções necessárias para executar a ordenação do tipo Tree Sort                                  |
+| QuickSort      | Implementação de todas as funções necessárias para executar os sequintes tipos de Quick Sort: Recursivo, Mediana, Inserção |
