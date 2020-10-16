@@ -6,29 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-class InsertSort<T extends Comparable<T>> implements Insert<T> {
-
-    //variaveis QuickSort Inserção
-    int QuickInsertion_key = 0; //comparações de chaves QuickSort Inserção
-    int QuickInsertion_copy = 0; //cópia de registro QuickSort Inserção
-
-    @Override
-    public void InsertionSort(T[] array) {
-        for (int i = 1; i < array.length; i++) {
-            int n = i;
-
-            while (n > 0 && array[n - 1].compareTo(array[n]) > 0) {
-                QuickInsertion_copy = QuickInsertion_copy + 1;
-                QuickInsertion_key = QuickInsertion_key + 1;
-                T temp = array[n];
-                array[n] = array[n - 1];
-                array[n - 1] = temp;
-                n--;
-            }
-        }
-    }
-}
-
 public class QuickSort {
 
     //variaveis para QuickSort Recursivo
@@ -40,6 +17,11 @@ public class QuickSort {
     //variaveis para QuickSort Insertion
     private int I_key = 0;
     private int I_copy = 0;
+    
+    //variaveis QuickSort Inserção
+    int QuickInsertion_key = 0; //comparações de chaves QuickSort Inserção
+    int QuickInsertion_copy = 0; //cópia de registro QuickSort Inserção
+
 
     public <T> int comparadorEspecial(T string1, T string2) {
         if (string1 instanceof String) {
@@ -49,6 +31,20 @@ public class QuickSort {
         }
     }
 
+    public <T> void InsertionSort(T[] array) {
+        for (int i = 1; i < array.length; i++) {
+            int n = i;
+
+            while (n > 0 && ((String)array[n - 1]).compareTo((String)array[n]) > 0) {
+                QuickInsertion_copy = QuickInsertion_copy + 1;
+                QuickInsertion_key = QuickInsertion_key + 1;
+                T temp = array[n];
+                array[n] = array[n - 1];
+                array[n - 1] = temp;
+                n--;
+            }
+        }
+    }
     public <T> void swap(int a, int b, T[] array) {
         T x = array[a];
         array[a] = array[b];
@@ -226,7 +222,7 @@ public class QuickSort {
     //sort mediana
     public <T> void M_sort(T[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
         long startTime = System.currentTimeMillis();
-        M_Quicksort(0, tam - 1, array,3); // k=3 ou k=5
+        M_Quicksort(0, tam - 1, array,5); // k=3 ou k=5
         long endTime = System.currentTimeMillis();
         double time = (endTime - startTime) / 1000.0;
 
@@ -260,10 +256,9 @@ public class QuickSort {
     }
 
     public <T> void QuickSortInsert(T[] array, int left, int right, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
-        if (right - left <= 10) {    //m = 10 , m = 100
-            InsertSort is = new InsertSort();
+        if (right - left <= 100) {    //m = 10 , m = 100
             long startTime = System.currentTimeMillis();
-            is.InsertionSort((Comparable[]) array);
+            InsertionSort((Comparable[]) array);
             long endTime = System.currentTimeMillis();
             double time = (endTime - startTime) / 1000.0;
 
@@ -274,8 +269,8 @@ public class QuickSort {
             gravarArq.println("-------------QuickSort Inserção-------------");
             gravarArq.println("Array de tamanho " + tam);
             gravarArq.println("Seed: " + seed);
-            gravarArq.println("Comparação de chaves: " + is.QuickInsertion_key);
-            gravarArq.println("Cópias de registro: " + is.QuickInsertion_copy);
+            gravarArq.println("Comparação de chaves: " + QuickInsertion_key);
+            gravarArq.println("Cópias de registro: " + QuickInsertion_copy);
             gravarArq.println("Tempo de execução: " + time);
             if (imprimirVetor == 1) {
                 gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
@@ -291,8 +286,8 @@ public class QuickSort {
             startTime = 0;
             endTime = 0;
             time = 0;
-            is.QuickInsertion_key = 0;
-            is.QuickInsertion_copy = 0;
+            QuickInsertion_key = 0;
+            QuickInsertion_copy = 0;
         } else {
             long startTime = System.currentTimeMillis();
             R_Quicksort(0, tam - 1, array);
@@ -334,3 +329,4 @@ public class QuickSort {
         QuickSortInsert(array, 0, tam - 1, tam, seed, resultado, imprimirVetor);
     }
 }
+
