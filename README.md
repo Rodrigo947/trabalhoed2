@@ -3,7 +3,7 @@
 ## Execução
 **1.** Baixe e instale o Java JDK 8 ou acima: 
 
-**Windows:** https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot 
+**Windows:** https://adoptopenjdk.net/
 
 **Linux:** `$ sudo apt install default-jre`
 
