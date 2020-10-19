@@ -1,11 +1,11 @@
 # Trabalho de Estrutura de Dados 2
 
 ## Execução
-**1.** Baixe e instale o Java JDK 14 ou acima: 
+**1.** Baixe e instale o Java JDK 8 ou acima: 
 
-**Windows:** https://adoptopenjdk.net/?variant=openjdk15&jvmVariant=hotspot 
+**Windows:** https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot 
 
-**Linux:** `$ sudo apt install openjdk-14-jre-headles`
+**Linux:** `$ sudo apt install default-jre`
 
 **2.** Clone o repositório do projeto do github:
 
