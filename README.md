@@ -1,11 +1,11 @@
 # Trabalho de Estrutura de Dados 2
 
 ## Execução
-**1.** Baixe e instale o Java JDK 14 ou acima: 
+**1.** Baixe e instale o Java JDK 8 ou acima: 
 
-**Windows:** https://adoptopenjdk.net/?variant=openjdk15&jvmVariant=hotspot 
+**Windows:** https://adoptopenjdk.net/
 
-**Linux:** `$ sudo apt install openjdk-14-jre-headles`
+**Linux:** `$ sudo apt install default-jre`
 
 **2.** Clone o repositório do projeto do github:
 
@@ -77,6 +77,8 @@ resultados/MergeSort
 resultados/TreeSort
 ```
 ## Descrição das Classes 
+
+Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da seguinteforma:
 
 | Nome da Classe | Descrição   |
 | -------------- | ----------- |
