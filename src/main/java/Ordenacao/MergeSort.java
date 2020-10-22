@@ -15,6 +15,8 @@ public class MergeSort {
         System.out.println("Array: "+tam+" Seed: "+seed);
         
         double time = 0;
+        key = 0;
+        copys = 0;
 
         long initialTime = System.currentTimeMillis();
 
@@ -57,9 +59,6 @@ public class MergeSort {
     private static void mergeString(String[] array, int ini, int meio, int fim) {
         int arrayAuxCount = fim - ini + 1;
         String[] arrayAux = new String[arrayAuxCount];
-
-        key = 0;
-        copys = 0;
 
         int i = ini, j = meio + 1, k = 0;
         while (i <= meio && j <= fim) {
