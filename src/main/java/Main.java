@@ -87,16 +87,17 @@ public class Main {
         int tam;
         String[] strings,stringsCopia;
         FileInputStream fileString;
-
+        TreeSort treeSort = new TreeSort();
         for (int i = 0; i < quantTamanhos; i++) { 
             tam = Integer.parseInt(entrada.readLine());
             //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
             FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt"); 
             FileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
             FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
+            FileWriter arqResultTreeSort = new FileWriter("resultados/TreeSort/S_" + tam + ".txt");
             
             for (int seed = 1; seed < 6; seed++) {
-
+                
                 fileString = new FileInputStream("data/arrays/"+tam+"/S_"+tam+"_"+seed+".txt");
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 fileString.close();
@@ -109,12 +110,15 @@ public class Main {
 
                 stringsCopia = strings.clone();
                 HeapSort.sort(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
+                
+                stringsCopia = strings.clone();
+                treeSort.sort(stringsCopia, tam, seed, arqResultTreeSort, imprimirVetor);
             }
 
             arqResultInsertionSort.close();
             arqResultMergeSort.close();
             arqResultHeapSort.close();
-            
+            arqResultTreeSort.close();
         }
     }
     
