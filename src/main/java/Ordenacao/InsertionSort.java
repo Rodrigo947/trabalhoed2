@@ -20,8 +20,8 @@ public class InsertionSort {
             int n = i;
             key++;
 
-            while (n > 0 && array[n - 1].compareTo(array[n]) > 0) {
-                if (array[n - 1].compareTo(array[n]) > 0) {
+            while (n > 0 && array[n - 1].compareToIgnoreCase(array[n]) > 0) {
+                if (array[n - 1].compareToIgnoreCase(array[n]) > 0) {
                     key++;
                 }
                 String temp = array[n];
