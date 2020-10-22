@@ -129,7 +129,7 @@ public class Main {
         
         BufferedReader entrada;
         Scanner sc = new Scanner(System.in);
-        int op = 1;
+        int op = 1, opImprime = 0;
         while(op!=0){
             System.out.println("TRABALHO DE ESTRUTURA DE DADOS 2");
             System.out.println("1-Cenario 1");
@@ -144,25 +144,25 @@ public class Main {
             switch (op) {
                 case 1:
                     System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
-                    op = sc.nextInt();
+                    opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
-                    cenario1(entrada,op);
+                    cenario1(entrada,opImprime);
                     entrada.close();
                 break;
 
                 case 2:
                     System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
-                    op = sc.nextInt();
+                    opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
-                    cenario2(entrada,op);
+                    cenario2(entrada,opImprime);
                     entrada.close();
                 break;
 
                 case 3:
                     System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
-                    op = sc.nextInt();
+                    opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
-                    cenario3(entrada,op);
+                    cenario3(entrada,opImprime);
                     entrada.close();
                 break;
 
