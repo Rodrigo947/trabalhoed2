@@ -11,7 +11,7 @@ public class HeapSort {
     
     public static void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws IOException {
         PrintWriter gravarArq = new PrintWriter(resultado);
-        System.out.println("Executando o HeapSort...");
+        System.out.println("Executando HeapSort...");
         System.out.println("Array: " + tam + " Seed: " + seed);
         
         double time = 0;
@@ -30,7 +30,7 @@ public class HeapSort {
 
         time = ((finalTime - initialTime) / 1000.0);
 
-        gravarArq.println("------------- Heap Sort -------------");
+        gravarArq.println("------------- HeapSort -------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
         gravarArq.println("Comparação de chaves: " + key);

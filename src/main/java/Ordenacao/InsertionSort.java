@@ -8,7 +8,7 @@ public class InsertionSort {
 
     public static void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws IOException {
         PrintWriter gravarArq = new PrintWriter(resultado);
-        System.out.println("Executando o InsertionSort...");
+        System.out.println("Executando InsertionSort...");
         System.out.println("Array: "+tam+" Seed: "+seed);
         
         long key = 0, copys = 0;
@@ -36,7 +36,7 @@ public class InsertionSort {
 
         time = ((finalTime - initialTime) / 1000.0);
 
-        gravarArq.println("------------- Insertion Sort -------------");
+        gravarArq.println("------------- InsertionSort -------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
         gravarArq.println("Comparação de chaves: " + key);

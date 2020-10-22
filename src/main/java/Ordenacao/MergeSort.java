@@ -11,7 +11,7 @@ public class MergeSort {
 
     public static void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws IOException {
         PrintWriter gravarArq = new PrintWriter(resultado);
-        System.out.println("Executando o MergeSort...");
+        System.out.println("Executando MergeSort...");
         System.out.println("Array: "+tam+" Seed: "+seed);
         
         double time = 0;
@@ -29,7 +29,7 @@ public class MergeSort {
 
         time = ((finalTime - initialTime) / 1000.0);
 
-        gravarArq.println("------------- Merge Sort -------------");
+        gravarArq.println("------------- MergeSort -------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
         gravarArq.println("Comparação de chaves: " + key);

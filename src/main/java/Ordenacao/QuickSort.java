@@ -188,14 +188,14 @@ public class QuickSort {
         System.out.println("Executando QuickSort Recursivo...");
         System.out.println("Array: " + tam + " Seed: " + seed);
 
-        gravarArq.println("-------------QuickSort Recursivo-------------");
+        gravarArq.println("------------- QuickSort Recursivo -------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
         gravarArq.println("Comparação de chaves: " + R_key);
         gravarArq.println("Cópias de registro: " + R_copy);
         gravarArq.println("Tempo de execução: " + time);
         if (imprimirVetor == 1) {
-            gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
+            gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
             for (int i = 0; i < tam; i++) {
                 if(array instanceof String[]){
                     gravarArq.println(array[i]);
@@ -230,14 +230,14 @@ public class QuickSort {
         System.out.println("Executando QuickSort Mediana...");
         System.out.println("Array: " + tam + " Seed: " + seed);
 
-        gravarArq.println("-------------QuickSort Mediana-------------");
+        gravarArq.println("------------- QuickSort Mediana -------------");
         gravarArq.println("Array de tamanho " + tam);
         gravarArq.println("Seed: " + seed);
         gravarArq.println("Comparação de chaves: " + M_key);
         gravarArq.println("Cópias de registro: " + M_copy);
         gravarArq.println("Tempo de execução: " + time);
         if (imprimirVetor == 1) {
-            gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
+            gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
             for (int i = 0; i < tam; i++) {
                 gravarArq.println(array[i]);
             }
@@ -266,14 +266,14 @@ public class QuickSort {
             System.out.println("Executando QuickSort Inserção...");
             System.out.println("Array: " + tam + " Seed: " + seed);
 
-            gravarArq.println("-------------QuickSort Inserção-------------");
+            gravarArq.println("------------- QuickSort Inserção -------------");
             gravarArq.println("Array de tamanho " + tam);
             gravarArq.println("Seed: " + seed);
             gravarArq.println("Comparação de chaves: " + QuickInsertion_key);
             gravarArq.println("Cópias de registro: " + QuickInsertion_copy);
             gravarArq.println("Tempo de execução: " + time);
             if (imprimirVetor == 1) {
-                gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
+                gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
                 for (int i = 0; i < tam; i++) {
                     gravarArq.println(array[i]);
                 }
@@ -298,14 +298,14 @@ public class QuickSort {
             System.out.println("Executando QuickSort Inserção...");
             System.out.println("Array: " + tam + " Seed: " + seed);
 
-            gravarArq.println("-------------QuickSort Inserção-------------");
+            gravarArq.println("------------- QuickSort Inserção -------------");
             gravarArq.println("Array de tamanho " + tam);
             gravarArq.println("Seed: " + seed);
             gravarArq.println("Comparação de chaves: " + I_key);
             gravarArq.println("Cópias de registro: " + I_copy);
             gravarArq.println("Tempo de execução: " + time);
             if (imprimirVetor == 1) {
-                gravarArq.println("\n>>>>>Vetor Ordenado:<<<<<\n");
+                gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
                 for (int i = 0; i < tam; i++) {
                     gravarArq.println(array[i]);
                 }
