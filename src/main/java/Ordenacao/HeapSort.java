@@ -61,7 +61,7 @@ public class HeapSort {
         int right = 2 * i + 2;
         int max;
 
-        if (left <= size && arr[left].compareTo(arr[i]) > 0) {
+        if (left <= size && arr[left].compareToIgnoreCase(arr[i]) > 0) {
             max = left;
             key++;
         } else {
@@ -69,7 +69,7 @@ public class HeapSort {
             key++;
         }
 
-        if (right <= size && arr[right].compareTo(arr[max]) > 0) {
+        if (right <= size && arr[right].compareToIgnoreCase(arr[max]) > 0) {
             max = right;
             key++;
         }

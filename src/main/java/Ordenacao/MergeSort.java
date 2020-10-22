@@ -64,7 +64,7 @@ public class MergeSort {
         int i = ini, j = meio + 1, k = 0;
         while (i <= meio && j <= fim) {
 
-            if (array[i].compareTo(array[j]) < 0) {
+            if (array[i].compareToIgnoreCase(array[j]) < 0) {
                 arrayAux[k] = array[i];
                 i++;
             } else {
