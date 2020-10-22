@@ -17,7 +17,7 @@ $ git clone https://github.com/Rodrigo947/trabalhoed2
 **4.** Abra um terminal na pasta e execute o comando:
 
 ```bash
-$ ava -cp trabalhoed2.jar Main
+$ java -cp trabalhoed2.jar Main
 ```
 
 ## Instruções de uso
