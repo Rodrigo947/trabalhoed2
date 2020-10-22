@@ -14,15 +14,10 @@ $ git clone https://github.com/Rodrigo947/trabalhoed2
 ```
 **3.** Faça o download do dataset no link https://drive.google.com/file/d/1Wg6pAx5sjdSS8M-9UNIEQPQiy_dS4Fzb/view?usp=sharing e extraia os arquivos na pasta `data` do projeto.
 
-**4.** No repositório existem duas pastas para executar o programa de formas diferentes: 
-#### ide
-Abra a pasta no NetBeans, selecione o arquivo Main.java e clique em Executar Projeto( F6 ).
-
-#### linha_de_comando
-Abra um terminal na pasta e execute o comando:
+**4.** Abra um terminal na pasta e execute o comando:
 
 ```bash
-$ java Main
+$ ava -cp trabalhoed2.jar Main
 ```
 
 ## Instruções de uso
