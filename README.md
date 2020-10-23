@@ -73,7 +73,7 @@ resultados/TreeSort
 ```
 ## Descrição das Classes 
 
-Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da seguinteforma:
+Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da seguinte forma:
 
 | Nome da Classe | Descrição   |
 | -------------- | ----------- |
