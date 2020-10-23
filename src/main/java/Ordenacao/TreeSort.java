@@ -64,7 +64,7 @@ public class TreeSort {
     }
 
     public void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
-        comparacoes = copias = 0;
+//        comparacoes = copias = 0;
         tempoInicial = tempoFinal = 0;
         PrintWriter gravarArq = new PrintWriter(resultado);
         System.out.println("Executando TreeSort...");
