@@ -90,9 +90,10 @@ public class TreeSort {
             gravarArq.println("Seed: " + seed);
             gravarArq.println("Comparação de chaves: " + this.comparacoes);
             gravarArq.println("Cópias de registro: " + this.copias);
-            gravarArq.println("Tempo de execução: " + this.tempoFinal + " segundos\n");
+            gravarArq.println("Tempo de execução: " + this.tempoFinal + " segundos");
 
             if (imprimirVetor == 1) {
+                gravarArq.println("\n>>>>> Vetor Ordenado: <<<<<\n");
                 for (String string : array) {
                     gravarArq.write(string + "\n");
                 }
