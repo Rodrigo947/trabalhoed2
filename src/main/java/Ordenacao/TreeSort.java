@@ -59,12 +59,14 @@ public class TreeSort {
                 copias++;
                 array[this.posicao] = atual.chave;
             }
+            posicao++;
             ordenadoRec(atual.direita, array, tam);
         }
     }
 
     public void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
-//        comparacoes = copias = 0;
+       
+        comparacoes = copias = 0;
         tempoInicial = tempoFinal = 0;
         PrintWriter gravarArq = new PrintWriter(resultado);
         System.out.println("Executando TreeSort...");
@@ -88,7 +90,7 @@ public class TreeSort {
             gravarArq.println("Seed: " + seed);
             gravarArq.println("Comparação de chaves: " + this.comparacoes);
             gravarArq.println("Cópias de registro: " + this.copias);
-            gravarArq.println("Tempo de execução: " + this.tempoFinal + " segundos");
+            gravarArq.println("Tempo de execução: " + this.tempoFinal + " segundos\n");
 
             if (imprimirVetor == 1) {
                 for (String string : array) {
