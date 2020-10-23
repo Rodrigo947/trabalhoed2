@@ -328,5 +328,32 @@ public class QuickSort {
     public <T> void I_sort(T[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
         QuickSortInsert(array, 0, tam - 1, tam, seed, resultado, imprimirVetor);
     }
+
+    public <T> void R_QuicksortINT(int left, int right, Integer[] array) {
+        if (left >= right) 
+            return;
+        
+        Integer pivo = array[left + (right - left) / 2];
+        Integer i = left;
+        Integer j = right;
+
+        while (i <= j) {
+            while (array[i].compareTo(pivo) < 0) 
+                i++;
+            
+            while (array[j].compareTo(pivo) > 0) 
+                j--;
+            
+            if (i <= j) {
+                Integer x = array[i];
+                array[i] = array[j];
+                array[j] = x;
+                i++;
+                j--;
+            }
+        }
+        R_QuicksortINT(left, j, array);
+        R_QuicksortINT(i, right, array);
+    }
 }
 

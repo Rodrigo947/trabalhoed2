@@ -145,7 +145,7 @@ public class GerarArrays {
             posicoes[i]=n;
         }
         QuickSort qs = new QuickSort();
-        qs.M_sort(posicoes, tam, seed, new FileWriter(new File("resultados/escolheNposicoes.txt")), 1);
+        qs.R_QuicksortINT(0, tam-1, posicoes);
         return posicoes;
     }
     // END ------------------
