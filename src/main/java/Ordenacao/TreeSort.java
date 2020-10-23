@@ -24,10 +24,9 @@ public class TreeSort {
     }
 
     No raiz;
-    int comparacoes;
-    int copias;
-    int posicao;
-    int posição2 = 0;
+    int comparacoes = 0;
+    int copias = 0;
+    int posicao = 0;
     double tempoInicial;
     double tempoFinal;
 
@@ -45,7 +44,7 @@ public class TreeSort {
         if (chave.compareToIgnoreCase(raiz.chave) < 0) {
             comparacoes++;
             raiz.esquerda = insereRec(raiz.esquerda, chave);
-        } else if (chave.compareToIgnoreCase(raiz.chave) > 0){
+        } else if (chave.compareToIgnoreCase(raiz.chave) > 0) {
             raiz.direita = insereRec(raiz.direita, chave);
         }
 
@@ -56,33 +55,33 @@ public class TreeSort {
         if (atual != null) {
             comparacoes++;
             ordenadoRec(atual.esquerda, array, tam);
-            array[this.posicao] = atual.chave;
-            if (this.posicao < tam-1) {
-                this.posicao++;
+            if (!array[this.posicao].equals(atual.chave)) {
+                copias++;
+                array[this.posicao] = atual.chave;
             }
             ordenadoRec(atual.direita, array, tam);
         }
     }
-    
-    
+
     public void sort(String[] array, int tam, int seed, FileWriter resultado, int imprimirVetor) throws Exception {
-        
+        comparacoes = copias = 0;
+        tempoInicial = tempoFinal = 0;
         PrintWriter gravarArq = new PrintWriter(resultado);
         System.out.println("Executando TreeSort...");
         System.out.println("Array: " + tam + " Seed: " + seed);
         this.comparacoes++;
         if (array.length > 0) {
             this.comparacoes = 1;
-            this.copias = 0;
             this.tempoInicial = System.currentTimeMillis();
-            this.posicao = 0;
-            
+
             for (int i = 0; i < array.length; i++) {
                 this.comparacoes++;
                 this.copias++;
                 insere(array[i]);
             }
+            
             ordenadoRec(this.raiz, array, tam);
+
             this.tempoFinal = (System.currentTimeMillis() - this.tempoInicial) / 1000;
             gravarArq.println("------------- TreeSort -------------");
             gravarArq.println("Array de tamanho " + tam);
@@ -90,7 +89,7 @@ public class TreeSort {
             gravarArq.println("Comparação de chaves: " + this.comparacoes);
             gravarArq.println("Cópias de registro: " + this.copias);
             gravarArq.println("Tempo de execução: " + this.tempoFinal + " segundos");
-            
+
             if (imprimirVetor == 1) {
                 for (String string : array) {
                     gravarArq.write(string + "\n");

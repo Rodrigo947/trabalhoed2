@@ -102,8 +102,8 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 fileString.close();
                 
-                stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
-                InsertionSort.sort(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
+                //stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
+                //InsertionSort.sort(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
                 MergeSort.sort(stringsCopia, tam, seed, arqResultMergeSort, imprimirVetor);
@@ -112,6 +112,7 @@ public class Main {
                 HeapSort.sort(stringsCopia, tam, seed, arqResultHeapSort, imprimirVetor);
                 
                 stringsCopia = strings.clone();
+                treeSort = new TreeSort();
                 treeSort.sort(stringsCopia, tam, seed, arqResultTreeSort, imprimirVetor);
             }
 
