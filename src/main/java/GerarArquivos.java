@@ -16,7 +16,7 @@ public class GerarArquivos {
      * e um arquivo chamado quantDados.txt que possui apenas a quantidade de registros encontrados no dataset.csv
      * @throws IOException
      */
-    public static void criarArqObj() throws IOException {
+    public static void criarArqObj() throws IOException, Exception {
         File datasetOBJ = new File("data/datasetOBJ.txt");
         File arqLinhas = new File("data/quantDados.txt");
         if (!datasetOBJ.exists() || !arqLinhas.exists()) {

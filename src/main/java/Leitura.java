@@ -23,7 +23,7 @@ public class Leitura {
      *
      * @throws java.io.IOException
      */
-    public static void datasetCSVtoOBJ(File file) throws IOException {
+    public static void datasetCSVtoOBJ(File file) throws IOException, Exception {
         try (BufferedReader sc = new BufferedReader(new FileReader(file)); FileOutputStream arqSaida = new FileOutputStream("data/datasetOBJ.txt")) {
             ObjectOutputStream gravarObj = new ObjectOutputStream(arqSaida);
             Livro livro = new Livro();
@@ -146,7 +146,7 @@ public class Leitura {
                 for (int j = 0; j < cabecalho.length; j++) 
                     arrayHashMap.put(cabecalho[j], AtributosFinais[j]);
                 
-
+                livro = new Livro();
                 livro.preencheLivro(arrayHashMap);
                 gravarObj.writeObject(livro);
                 gravarObj.flush();
@@ -166,6 +166,8 @@ public class Leitura {
             gravarObj.close();
             sc.close();
             arqSaida.close();
+        }catch(Exception e){
+            e.printStackTrace();
         }
 
 
