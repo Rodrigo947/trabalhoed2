@@ -1,5 +1,6 @@
 
 import Livro.Livro;
+import Livro.LivroAux;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,10 +13,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class GerarArrays {
-
 
     /**
      * Cria um vetor do tipo string de titulos aleatórios
@@ -27,7 +28,7 @@ public class GerarArrays {
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public String[] arrayTitulos(int tam, int quantDados, Integer posicoes[] ) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+    public String[] arrayTitulos(int tam, int quantDados, Integer posicoes[]) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
@@ -80,7 +81,7 @@ public class GerarArrays {
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public Livro[] arrayLivros(int tam, int quantDados, Integer posicoes[] ) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+    public Livro[] arrayLivros(int tam, int quantDados, Integer posicoes[]) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
@@ -123,12 +124,35 @@ public class GerarArrays {
     }
     // END ------------------
 
+    public static List<LivroAux> arrayLivrosAuxiliares(int quantDados) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+
+        BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        List<LivroAux> livrosAuxiliares = new ArrayList<>();
+        int progresso = 0, progressoAtual = 0, posicaoAtual;
+        System.out.println("\nConstruindo array de Livros auxiliares:");
+
+        for (int i = 0; i < quantDados; i++) {
+            Livro livro = (Livro) oi.readObject();
+            livrosAuxiliares.add(new LivroAux(livro.getId(), livro.getAuthor()));
+            progressoAtual = (int) (i * 100) / quantDados;
+            if (progresso < progressoAtual) {
+                progresso = progressoAtual;
+                System.out.println(progressoAtual + "%");
+            }
+        }
+
+        oi.close();
+        fi.close();
+        return livrosAuxiliares;
+    }
+
     /**
-     * Gera uma lista ordenada de n posições aleatórias unicas entre 0 e a quantidade de dados
-     * do dataset passada como parametro 
+     * Gera uma lista ordenada de n posições aleatórias unicas entre 0 e a
+     * quantidade de dados do dataset passada como parametro
      *
-     * @param tam        tamanho da lista
-     * @param seed       semente para gerar numeros aleatorios
+     * @param tam tamanho da lista
+     * @param seed semente para gerar numeros aleatorios
      * @param quantDados quantidade de dados do arquivo
      * @return vetor de posições
      * @throws Exception
@@ -140,34 +164,39 @@ public class GerarArrays {
         Integer posicoes[] = new Integer[tam];
         for (int i = 0; i < tam; i++) {
             n = gerador.nextInt(quantDados);
-            while( contains(posicoes,n,i) )
+            while (contains(posicoes, n, i)) {
                 n = gerador.nextInt(quantDados);
-            posicoes[i]=n;
+            }
+            posicoes[i] = n;
         }
         QuickSort qs = new QuickSort();
-        qs.R_QuicksortINT(0, tam-1, posicoes);
+        qs.R_QuicksortINT(0, tam - 1, posicoes);
         return posicoes;
     }
     // END ------------------
 
     /**
      * Verifica se o valor v está contido no array
+     *
      * @param array array de pesquisa
      * @param v valor a ser procurado
      * @param tam tamnho do array
      * @return
      */
-    private static boolean contains(Integer[] array, int v, int tam){
+    private static boolean contains(Integer[] array, int v, int tam) {
         for (int j = 0; j < tam; j++) {
-            if(array[j] == v)
+            if (array[j] == v) {
                 return true;
+            }
         }
-            
-        return false; 
+
+        return false;
     }
 
     /**
-     * Gera um vetor de strings a partir de um arquivo do tipo S_tamanho_seed.txt
+     * Gera um vetor de strings a partir de um arquivo do tipo
+     * S_tamanho_seed.txt
+     *
      * @param file arquivo a ser lido
      * @param tam tamanho do vetor gerado
      * @return vetor de strings
@@ -183,20 +212,22 @@ public class GerarArrays {
     }
 
     /**
-     * Gera um vetor de objetos Livro a partir de um arquivo do tipo L_tamanho_seed.txt
+     * Gera um vetor de objetos Livro a partir de um arquivo do tipo
+     * L_tamanho_seed.txt
+     *
      * @param file arquivo a ser lido
      * @param tam tamanho do vetor gerado
      * @return vetor de objetos Livro
      * @throws IOException
      */
-    public static Livro[] arqParaVetorLivros(FileInputStream file, int tam)throws ClassNotFoundException, IOException {
+    public static Livro[] arqParaVetorLivros(FileInputStream file, int tam) throws ClassNotFoundException, IOException {
         ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(file));
         Livro[] livros = new Livro[tam];
-        for (int i = 0; i < tam; i++) 
+        for (int i = 0; i < tam; i++) {
             livros[i] = (Livro) oi.readObject();
-        
+        }
+
         return livros;
     }
 
-    
 }

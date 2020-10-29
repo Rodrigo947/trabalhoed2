@@ -169,9 +169,6 @@ public class Leitura {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
-
         
     }
     // END ------------------
