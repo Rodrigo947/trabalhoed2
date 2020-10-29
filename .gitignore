@@ -11,6 +11,7 @@ nbactions.xml
 
 data/arrays/*
 data/dataset.csv
+data/authors.csv
 data/datasetOBJ.txt
 data/quantDados.txt
 

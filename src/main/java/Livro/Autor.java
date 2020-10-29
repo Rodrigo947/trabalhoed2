@@ -1,11 +1,11 @@
 package Livro;
 
-public class Autores {
+public class Autor {
     private int id; 
     private String nome;
     private int quantLivros;
 
-    public Autores(int id, String nome, int quantLivros){
+    public Autor(int id, String nome){
         this.id = id;
         this.nome = nome;
         this.quantLivros = 0;

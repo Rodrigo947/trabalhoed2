@@ -1,15 +1,15 @@
 
+import Livro.Autor;
 import Livro.Livro;
 import Livro.LivroAux;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import Ordenacao.*;
 import java.io.File;
-
 import java.util.Random;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -129,8 +129,8 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         List<LivroAux> livrosAuxiliares = new ArrayList<>();
-        int progresso = 0, progressoAtual = 0, posicaoAtual;
-        System.out.println("\nConstruindo array de Livros auxiliares:");
+        int progresso = 0, progressoAtual = 0;
+        System.out.println("\nConstruindo array de Livros auxiliares...");
 
         for (int i = 0; i < quantDados; i++) {
             Livro livro = (Livro) oi.readObject();
@@ -146,6 +146,49 @@ public class GerarArrays {
         fi.close();
         return livrosAuxiliares;
     }
+
+    /**
+     * @param file arquivo authors.csv contido na pasta data
+     *
+     * @throws java.io.IOException
+     */
+    public static List<Autor> arrayAutores() throws IOException {
+        File file = new File("data/authors.csv");
+        BufferedReader sc = new BufferedReader(new FileReader(file));
+        List<Autor> autores = new ArrayList<>();
+        int id,quantChar;
+        String linha,nome,aux;
+
+        System.out.println("\nConstruindo array de Autores...");
+
+        linha = sc.readLine();
+        while ((linha = sc.readLine()) != null) {
+            quantChar = 1;
+            aux = "";
+            
+            while(linha.charAt(quantChar) != '\"'){
+                aux += linha.charAt(quantChar);
+                quantChar++;
+            }
+            id = (Integer) Integer.parseInt(aux);
+
+            quantChar += 3;
+            aux = "";
+
+            while(linha.charAt(quantChar) != '\"'){
+                aux += linha.charAt(quantChar);
+                quantChar++;
+            }
+            nome = aux;
+            
+            Autor autor = new Autor(id,nome);
+            autores.add(autor);
+        }
+        sc.close();
+        
+        return autores;
+    }
+
 
     /**
      * Gera uma lista ordenada de n posições aleatórias unicas entre 0 e a

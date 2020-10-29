@@ -4,11 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
-
+import Livro.Autor;
 import Livro.Livro;
 import Livro.LivroAux;
 import Ordenacao.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -130,6 +129,9 @@ public class Main {
     public static void parte2() throws Exception {
         BufferedReader fileQuantDados = new BufferedReader(new FileReader("data/quantDados.txt"));
         List<LivroAux> livrosAuxiliares = GerarArrays.arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
+        List<Autor> autores = GerarArrays.arrayAutores();
+        
+        fileQuantDados.close();
     }
 
     public static void main(String[] args) throws ClassNotFoundException, Exception {
