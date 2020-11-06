@@ -5,6 +5,8 @@ public class Autor {
     private String nome;
     private int quantLivros;
 
+    public Autor(){}
+
     public Autor(int id, String nome){
         this.id = id;
         this.nome = nome;

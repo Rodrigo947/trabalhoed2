@@ -8,6 +8,8 @@ import Livro.Autor;
 import Livro.Livro;
 import Livro.LivroAux;
 import Ordenacao.*;
+import TabelasHash.TabelaLivros;
+
 import java.util.List;
 
 public class Main {
@@ -129,8 +131,17 @@ public class Main {
     public static void parte2() throws Exception {
         BufferedReader fileQuantDados = new BufferedReader(new FileReader("data/quantDados.txt"));
         List<LivroAux> livrosAuxiliares = GerarArrays.arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
-        List<Autor> autores = GerarArrays.arrayAutores();
+        //List<Autor> autores = GerarArrays.arrayAutores();
+        //autores.size();
         
+        TabelaLivros tabelaLivros = new TabelaLivros(livrosAuxiliares.size());
+        for (LivroAux livroAux : livrosAuxiliares) {
+            tabelaLivros.add(livroAux);
+        }
+
+        tabelaLivros.imprimeTabela();
+        
+
         fileQuantDados.close();
     }
 

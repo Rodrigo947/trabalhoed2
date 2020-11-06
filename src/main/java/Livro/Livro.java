@@ -75,6 +75,7 @@ public class Livro implements Serializable, Cloneable {
         this.title = Atributos.get("title");
         this.publicationPlace = Atributos.get("publication-place");
         this.format = Atributos.get("format");
+        
         this.lang = Atributos.get("lang");
 
         this.url = "https://bookdepository.com" + Atributos.get("url");
