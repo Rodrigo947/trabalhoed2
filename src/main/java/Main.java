@@ -15,7 +15,8 @@ import java.util.List;
 public class Main {
 
     public static void cenario1(BufferedReader entrada, int imprimirVetor) throws Exception {
-        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
+        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de
+                                                                  // entrada.txt
         int tam;
         String[] strings;
         Livro[] livros;
@@ -24,14 +25,17 @@ public class Main {
 
         for (int i = 0; i < quantTamanhos; i++) {
             tam = Integer.parseInt(entrada.readLine());
-            if (tam <= 100000) { //No cenario 1 são vetores de até 100.000 posições
-                //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-                FileWriter arqResultadosQuickSortString = new FileWriter("resultados/QuickSort/cenario1/Recursivo/S_" + tam + ".txt");
-                FileWriter arqResultadosQuickSortObj = new FileWriter("resultados/QuickSort/cenario1/Recursivo/L_" + tam + ".txt");
+            if (tam <= 100000) { // No cenario 1 são vetores de até 100.000 posições
+                // Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
+                FileWriter arqResultadosQuickSortString = new FileWriter(
+                        "resultados/QuickSort/cenario1/Recursivo/S_" + tam + ".txt");
+                FileWriter arqResultadosQuickSortObj = new FileWriter(
+                        "resultados/QuickSort/cenario1/Recursivo/L_" + tam + ".txt");
 
                 for (int seed = 1; seed < 6; seed++) {
                     fileString = new FileInputStream("data/arrays/" + tam + "/S_" + tam + "_" + seed + ".txt");
-                    strings = GerarArrays.arqParaVetorString(fileString, tam); //gerando o array de acordo a partir do arquivo de acordo com a seed
+                    strings = GerarArrays.arqParaVetorString(fileString, tam); // gerando o array de acordo a partir do
+                                                                               // arquivo de acordo com a seed
                     fileString.close();
 
                     fileLivro = new FileInputStream("data/arrays/" + tam + "/L_" + tam + "_" + seed + ".txt");
@@ -49,7 +53,8 @@ public class Main {
     }
 
     public static void cenario2(BufferedReader entrada, int imprimirVetor) throws Exception {
-        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
+        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de
+                                                                  // entrada.txt
         int tam;
         String[] strings, stringsCopia;
         FileInputStream fileString;
@@ -58,10 +63,13 @@ public class Main {
 
         for (int i = 0; i < quantTamanhos; i++) {
             tam = Integer.parseInt(entrada.readLine());
-            //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
-            FileWriter arqResultadosQuickSortRecursivo = new FileWriter("resultados/QuickSort/cenario2/Recursivo/S_" + tam + ".txt");
-            FileWriter arqResultadosQuickSortMediana = new FileWriter("resultados/QuickSort/cenario2/Mediana/S_" + tam + ".txt");
-            FileWriter arqResultadosQuickSortInsercao = new FileWriter("resultados/QuickSort/cenario2/Insercao/S_" + tam + ".txt");
+            // Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
+            FileWriter arqResultadosQuickSortRecursivo = new FileWriter(
+                    "resultados/QuickSort/cenario2/Recursivo/S_" + tam + ".txt");
+            FileWriter arqResultadosQuickSortMediana = new FileWriter(
+                    "resultados/QuickSort/cenario2/Mediana/S_" + tam + ".txt");
+            FileWriter arqResultadosQuickSortInsercao = new FileWriter(
+                    "resultados/QuickSort/cenario2/Insercao/S_" + tam + ".txt");
 
             for (int seed = 1; seed < 6; seed++) {
 
@@ -69,7 +77,8 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 fileString.close();
 
-                stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
+                stringsCopia = strings.clone(); // necessidade de copiar a string para que a proxima função não ordene
+                                                // uma string já ordenada
                 quicksort.R_sort(stringsCopia, tam, seed, arqResultadosQuickSortRecursivo, imprimirVetor);
 
                 stringsCopia = strings.clone();
@@ -88,14 +97,15 @@ public class Main {
     }
 
     public static void cenario3(BufferedReader entrada, int imprimirVetor) throws Exception {
-        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
+        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de
+                                                                  // entrada.txt
         int tam;
         String[] strings, stringsCopia;
         FileInputStream fileString;
         TreeSort treeSort = new TreeSort();
         for (int i = 0; i < quantTamanhos; i++) {
             tam = Integer.parseInt(entrada.readLine());
-            //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
+            // Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
             FileWriter arqResultInsertionSort = new FileWriter("resultados/InsertionSort/S_" + tam + ".txt");
             FileWriter arqResultMergeSort = new FileWriter("resultados/MergeSort/S_" + tam + ".txt");
             FileWriter arqResultHeapSort = new FileWriter("resultados/HeapSort/S_" + tam + ".txt");
@@ -107,7 +117,8 @@ public class Main {
                 strings = GerarArrays.arqParaVetorString(fileString, tam);
                 fileString.close();
 
-                stringsCopia = strings.clone(); //necessidade de copiar a string para que a proxima função não ordene uma string já ordenada
+                stringsCopia = strings.clone(); // necessidade de copiar a string para que a proxima função não ordene
+                                                // uma string já ordenada
                 InsertionSort.sort(stringsCopia, tam, seed, arqResultInsertionSort, imprimirVetor);
 
                 stringsCopia = strings.clone();
@@ -130,17 +141,17 @@ public class Main {
 
     public static void parte2() throws Exception {
         BufferedReader fileQuantDados = new BufferedReader(new FileReader("data/quantDados.txt"));
-        List<LivroAux> livrosAuxiliares = GerarArrays.arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
-        //List<Autor> autores = GerarArrays.arrayAutores();
-        //autores.size();
-        
+        List<LivroAux> livrosAuxiliares = GerarArrays
+                .arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
+        List<Autor> autores = GerarArrays.arrayAutores();
+        autores.size();
+
         TabelaLivros tabelaLivros = new TabelaLivros(livrosAuxiliares.size());
         for (LivroAux livroAux : livrosAuxiliares) {
             tabelaLivros.add(livroAux);
         }
 
         tabelaLivros.imprimeTabela();
-        
 
         fileQuantDados.close();
     }
@@ -165,7 +176,8 @@ public class Main {
 
             switch (op) {
                 case 1:
-                    System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                    System.out
+                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario1(entrada, opImprime);
@@ -173,7 +185,8 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                    System.out
+                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario2(entrada, opImprime);
@@ -181,7 +194,8 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                    System.out
+                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario3(entrada, opImprime);
@@ -191,7 +205,7 @@ public class Main {
                 case 4:
                     parte2();
                     break;
-                    
+
                 case 5:
                     GerarArquivos.criarArqObj();
                     break;

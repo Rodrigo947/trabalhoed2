@@ -1,7 +1,7 @@
 package Livro;
 
 public class Autor {
-    private int id; 
+    private long id; 
     private String nome;
     private int quantLivros;
 
@@ -13,7 +13,7 @@ public class Autor {
         this.quantLivros = 0;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

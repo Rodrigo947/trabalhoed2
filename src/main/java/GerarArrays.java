@@ -21,14 +21,15 @@ public class GerarArrays {
     /**
      * Cria um vetor do tipo string de titulos aleatórios
      *
-     * @param tam tamanho da lista
+     * @param tam        tamanho da lista
      * @param quantDados quantidade de registros do arquivo dataset.csv
-     * @param posicoes vetor de posicoes escolhidas aleatoriamente
+     * @param posicoes   vetor de posicoes escolhidas aleatoriamente
      * @return array de títulos aleatórios
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public String[] arrayTitulos(int tam, int quantDados, Integer posicoes[]) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+    public String[] arrayTitulos(int tam, int quantDados, Integer posicoes[])
+            throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
@@ -39,7 +40,7 @@ public class GerarArrays {
 
         for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
 
-            //verifica se a posição atual foi selecionada
+            // verifica se a posição atual foi selecionada
             if (posicoes[j] == i) {
                 titulos[j] = ((Livro) oi.readObject()).getTitle();
                 posicaoAtual = j;
@@ -75,13 +76,14 @@ public class GerarArrays {
     /**
      * Cria um vetor do tipo livro com objetos aleatórios
      *
-     * @param tam tamanho da lista
+     * @param tam        tamanho da lista
      * @param quantDados quantidade de dados do arquivo
-     * @param posicoes vetor de posicoes escolhidas aleatoriamente
+     * @param posicoes   vetor de posicoes escolhidas aleatoriamente
      * @throws java.io.FileNotFoundException
      * @throws java.lang.ClassNotFoundException
      */
-    public Livro[] arrayLivros(int tam, int quantDados, Integer posicoes[]) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+    public Livro[] arrayLivros(int tam, int quantDados, Integer posicoes[])
+            throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
@@ -91,7 +93,7 @@ public class GerarArrays {
         System.out.println("Construindo array de OBJETOS Livro com " + tam + " posicoes aleatorias...");
         for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
 
-            //verifica se a posição atual foi selecionada
+            // verifica se a posição atual foi selecionada
             if (posicoes[j] == i) {
                 livros[j] = (Livro) oi.readObject();
                 posicaoAtual = j;
@@ -124,7 +126,8 @@ public class GerarArrays {
     }
     // END ------------------
 
-    public static List<LivroAux> arrayLivrosAuxiliares(int quantDados) throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+    public static List<LivroAux> arrayLivrosAuxiliares(int quantDados)
+            throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
 
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
@@ -156,8 +159,8 @@ public class GerarArrays {
         File file = new File("data/authors.csv");
         BufferedReader sc = new BufferedReader(new FileReader(file));
         List<Autor> autores = new ArrayList<>();
-        int id,quantChar;
-        String linha,nome,aux;
+        int id, quantChar;
+        String linha, nome, aux;
 
         System.out.println("\nConstruindo array de Autores...");
 
@@ -165,8 +168,8 @@ public class GerarArrays {
         while ((linha = sc.readLine()) != null) {
             quantChar = 1;
             aux = "";
-            
-            while(linha.charAt(quantChar) != '\"'){
+
+            while (linha.charAt(quantChar) != '\"') {
                 aux += linha.charAt(quantChar);
                 quantChar++;
             }
@@ -175,27 +178,26 @@ public class GerarArrays {
             quantChar += 3;
             aux = "";
 
-            while(linha.charAt(quantChar) != '\"'){
+            while (linha.charAt(quantChar) != '\"') {
                 aux += linha.charAt(quantChar);
                 quantChar++;
             }
             nome = aux;
-            
-            Autor autor = new Autor(id,nome);
+
+            Autor autor = new Autor(id, nome);
             autores.add(autor);
         }
         sc.close();
-        
+
         return autores;
     }
-
 
     /**
      * Gera uma lista ordenada de n posições aleatórias unicas entre 0 e a
      * quantidade de dados do dataset passada como parametro
      *
-     * @param tam tamanho da lista
-     * @param seed semente para gerar numeros aleatorios
+     * @param tam        tamanho da lista
+     * @param seed       semente para gerar numeros aleatorios
      * @param quantDados quantidade de dados do arquivo
      * @return vetor de posições
      * @throws Exception
@@ -222,8 +224,8 @@ public class GerarArrays {
      * Verifica se o valor v está contido no array
      *
      * @param array array de pesquisa
-     * @param v valor a ser procurado
-     * @param tam tamnho do array
+     * @param v     valor a ser procurado
+     * @param tam   tamnho do array
      * @return
      */
     private static boolean contains(Integer[] array, int v, int tam) {
@@ -237,11 +239,10 @@ public class GerarArrays {
     }
 
     /**
-     * Gera um vetor de strings a partir de um arquivo do tipo
-     * S_tamanho_seed.txt
+     * Gera um vetor de strings a partir de um arquivo do tipo S_tamanho_seed.txt
      *
      * @param file arquivo a ser lido
-     * @param tam tamanho do vetor gerado
+     * @param tam  tamanho do vetor gerado
      * @return vetor de strings
      * @throws IOException
      */
@@ -259,7 +260,7 @@ public class GerarArrays {
      * L_tamanho_seed.txt
      *
      * @param file arquivo a ser lido
-     * @param tam tamanho do vetor gerado
+     * @param tam  tamanho do vetor gerado
      * @return vetor de objetos Livro
      * @throws IOException
      */
