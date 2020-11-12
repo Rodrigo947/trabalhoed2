@@ -168,7 +168,6 @@ public class Main {
         // tabelaAutores.imprimeQuantidade();
 
         QuickSort quicksort = new QuickSort();
-
         Object[] autoresOrdenado = tabelaAutores.getAutores().toArray();
         quicksort.R_Quicksort(0, autoresOrdenado.length - 1, autoresOrdenado);
 
