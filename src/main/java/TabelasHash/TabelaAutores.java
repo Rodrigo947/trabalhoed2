@@ -50,4 +50,29 @@ public class TabelaAutores {
             System.out.println(this.autores.get(i).getId() + " / " + this.next.get(i));
         }
     }
+
+    public void imprimeQuantidade() {
+        for (int i = 0; i < this.tamanho; i++) {
+            System.out.println(this.autores.get(i).getNome() + " / " + this.autores.get(i).getQuantLivros());
+        }
+    }
+
+    public Autor find(long id) {
+        int posicao = Divisao(id, this.tamanho);
+        if (this.autores.get(posicao).getId() == id) {
+            return this.autores.get(posicao);
+        } else {
+            while (this.next.get(posicao) != -1) {
+                if (this.autores.get(posicao).getId() == id) {
+                    return this.autores.get(posicao);
+                }
+                posicao = this.next.get(posicao);
+            }
+            return null;
+        }
+    }
+
+    public List<Autor> getAutores() {
+        return this.autores;
+    }
 }

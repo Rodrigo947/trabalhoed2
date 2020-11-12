@@ -8,8 +8,10 @@ import Livro.Autor;
 import Livro.Livro;
 import Livro.LivroAux;
 import Ordenacao.*;
+import TabelasHash.TabelaAutores;
 import TabelasHash.TabelaLivros;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -141,19 +143,41 @@ public class Main {
 
     public static void parte2() throws Exception {
         BufferedReader fileQuantDados = new BufferedReader(new FileReader("data/quantDados.txt"));
-        List<LivroAux> livrosAuxiliares = GerarArrays
-                .arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
+        List<LivroAux> livrosAuxiliares = GerarArrays.arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
         List<Autor> autores = GerarArrays.arrayAutores();
-        autores.size();
-
+        
         TabelaLivros tabelaLivros = new TabelaLivros(livrosAuxiliares.size());
-        for (LivroAux livroAux : livrosAuxiliares) {
+        for (LivroAux livroAux : livrosAuxiliares) 
             tabelaLivros.add(livroAux);
-        }
-
-        tabelaLivros.imprimeTabela();
+        
+        TabelaAutores tabelaAutores= new TabelaAutores(autores.size());
+        for (Autor autor : autores) 
+            tabelaAutores.add(autor);
 
         fileQuantDados.close();
+
+        // int authorsNotFound = 0;
+        for (LivroAux livro : tabelaLivros.getLivros()) {
+            for (long autor : livro.getAutores()) {
+                if (tabelaAutores.find(autor) != null) {
+                    tabelaAutores.find(autor).incrementQuantLivros();
+                }
+            }
+        }
+
+        QuickSort quicksort = new QuickSort();
+        Object[] autoresOrdenado = tabelaAutores.getAutores().toArray();
+        quicksort.R_Quicksort(0, autoresOrdenado.length - 1, autoresOrdenado);
+
+        int cont = 0;
+        for (Object autor : autoresOrdenado) {
+            Autor aux = (Autor) autor;
+            System.out.println(aux.getNome() + " - " + aux.getQuantLivros());
+            cont++;
+            if (cont == 10) {
+                return;
+            }
+        }
     }
 
     public static void main(String[] args) throws ClassNotFoundException, Exception {

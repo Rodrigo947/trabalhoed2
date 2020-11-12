@@ -1,7 +1,7 @@
 package Livro;
 
 public class Autor {
-    private long id; 
+    private Integer id; 
     private String nome;
     private int quantLivros;
 
@@ -25,7 +25,7 @@ public class Autor {
         return quantLivros;
     }
 
-    public void incrementQuantLivros(int quantLivros) {
+    public void incrementQuantLivros() {
         this.quantLivros++;
     }
     

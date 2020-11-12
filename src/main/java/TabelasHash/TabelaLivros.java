@@ -51,4 +51,8 @@ public class TabelaLivros {
         }
     }
 
+    public List<LivroAux> getLivros() {
+        return this.livros;
+    }
+
 }
