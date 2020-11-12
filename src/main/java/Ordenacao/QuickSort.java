@@ -1,5 +1,6 @@
 package Ordenacao;
 
+import Livro.Autor;
 import Livro.Livro;
 import java.io.*;
 import java.util.HashMap;
@@ -23,11 +24,14 @@ public class QuickSort {
     int QuickInsertion_copy = 0; //cópia de registro QuickSort Inserção
 
 
-    public <T> int comparadorEspecial(T string1, T string2) {
-        if (string1 instanceof String) {
-            return ((String) string1).compareToIgnoreCase((String) string2);
-        } else {
-            return ((Livro) string1).getTitle().compareToIgnoreCase(((Livro) string2).getTitle());
+    public <T> int comparadorEspecial(T a, T b) {
+        if (a instanceof String) {
+            return ((String) a).compareToIgnoreCase((String) b);
+        } else if(a instanceof Autor) {
+            return (((Autor) b).getQuantLivros() - ((Autor) a).getQuantLivros());
+        }
+        else{
+            return ((Livro) a).getTitle().compareToIgnoreCase(((Livro) b).getTitle());
         }
     }
 
