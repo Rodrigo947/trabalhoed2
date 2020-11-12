@@ -34,30 +34,38 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         String[] titulos = new String[tam];
-        int progresso = 0, progressoAtual = 0, posicaoAtual;
-
+        int progresso = 1, progressoAtual = 0, posicaoAtual;
+        long quantlinhas = 0;
+        
         System.out.println("\nConstruindo array de STRING titulos com " + tam + " posicoes aleatorias...");
 
-        for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
+        for (int i = 0, j = 0; i < quantDados && j < tam; i++, quantlinhas++) {
 
             // verifica se a posição atual foi selecionada
             if (posicoes[j] == i) {
                 titulos[j] = ((Livro) oi.readObject()).getTitle();
                 posicaoAtual = j;
                 j++;
-                progressoAtual = (int) (j * 100) / tam;
                 if (progresso < progressoAtual) {
-                    progresso = progressoAtual;
-                    System.out.println(progressoAtual + "%");
-                }
-                while (j < tam && posicoes[j] == i) {
+                    System.out.print("\r[");
 
-                    // imprimir progresso
-                    progressoAtual = (int) (j * 100) / tam;
-                    if (progresso < progressoAtual) {
-                        progresso = progressoAtual;
-                        System.out.println(progressoAtual + "%");
+                    for (int aux = 0; aux < 10; ++aux) {
+                        if (aux < progresso / 10)
+                            System.out.print("=");
+                        else if (aux == progresso / 10)
+                            System.out.print(">");
+                        else
+                            System.out.print(" ");
                     }
+
+                    System.out.print("]" + progresso + "% ");
+
+                    progresso = (int) progressoAtual;
+
+                }
+                progressoAtual = (int) (quantlinhas * 100) / quantDados;
+                
+                while (j < tam && posicoes[j] == i) {
 
                     titulos[j] = titulos[posicaoAtual];
                     j++;
@@ -67,6 +75,7 @@ public class GerarArrays {
                 oi.readObject();
             }
         }
+        System.out.println("");
         oi.close();
         fi.close();
         return titulos;
@@ -88,30 +97,38 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         Livro[] livros = new Livro[tam];
-        int progresso = 0, progressoAtual = 0, posicaoAtual;
+        int progresso = 1, progressoAtual = 0, posicaoAtual;
+        long quantlinhas = 0;
 
         System.out.println("Construindo array de OBJETOS Livro com " + tam + " posicoes aleatorias...");
-        for (int i = 0, j = 0; i < quantDados && j < tam; i++) {
+        for (int i = 0, j = 0; i < quantDados && j < tam; i++, quantlinhas++) {
+
+            if (progresso < progressoAtual) {
+                System.out.print("\r[");
+
+                for (int aux = 0; aux < 10; aux++) {
+                    if (aux < progresso / 10)
+                        System.out.print("=");
+                    else if (aux == progresso / 10)
+                        System.out.print(">");
+                    else
+                        System.out.print(" ");
+                }
+
+                System.out.print("]" + progresso + "% ");
+
+                progresso = (int) progressoAtual;
+            }
+
+            progressoAtual = (int) (quantlinhas * 100) / quantDados;
 
             // verifica se a posição atual foi selecionada
             if (posicoes[j] == i) {
                 livros[j] = (Livro) oi.readObject();
                 posicaoAtual = j;
                 j++;
-                progressoAtual = (int) (j * 100) / tam;
-                if (progresso < progressoAtual) {
-                    progresso = progressoAtual;
-                    System.out.println(progressoAtual + "%");
-                }
+                
                 while (j < tam && posicoes[j] == i) {
-
-                    // imprimir progresso
-                    progressoAtual = (int) (j * 100) / tam;
-                    if (progresso < progressoAtual) {
-                        progresso = progressoAtual;
-                        System.out.println(progressoAtual + "%");
-                    }
-
                     livros[j] = (Livro) livros[posicaoAtual].clone();
                     j++;
                 }
@@ -120,6 +137,7 @@ public class GerarArrays {
                 oi.readObject();
             }
         }
+        System.out.println("");
         oi.close();
 
         return livros;
@@ -132,19 +150,34 @@ public class GerarArrays {
         BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
         ObjectInputStream oi = new ObjectInputStream(fi);
         List<LivroAux> livrosAuxiliares = new ArrayList<>();
-        int progresso = 0, progressoAtual = 0;
+        int progresso = 1, progressoAtual = 0;
+        long quantlinhas = 0;
         System.out.println("\nConstruindo array de Livros auxiliares...");
 
-        for (int i = 0; i < quantDados; i++) {
+        for (int i = 0; i < quantDados; i++, quantlinhas++) {
             Livro livro = (Livro) oi.readObject();
             livrosAuxiliares.add(new LivroAux(livro.getId(), livro.getAuthor()));
-            progressoAtual = (int) (i * 100) / quantDados;
+            
             if (progresso < progressoAtual) {
-                progresso = progressoAtual;
-                System.out.println(progressoAtual + "%");
-            }
-        }
+                System.out.print("\r[");
 
+                for (int aux = 0; aux < 10; ++aux) {
+                    if (aux < progresso / 10)
+                        System.out.print("=");
+                    else if (aux == progresso / 10)
+                        System.out.print(">");
+                    else
+                        System.out.print(" ");
+                }
+
+                System.out.print("]" + progresso + "% ");
+
+                progresso = (int) progressoAtual;
+
+            }
+            progressoAtual = (int) (quantlinhas * 100) / quantDados;
+        }
+        System.out.println("");
         oi.close();
         fi.close();
         return livrosAuxiliares;
