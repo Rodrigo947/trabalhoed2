@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import Livro.Autor;
 import Livro.Livro;
@@ -141,11 +142,13 @@ public class Main {
         }
     }
 
-    public static void parte2() throws Exception {
+    public static void parte2(int topAutores) throws Exception {
         BufferedReader fileQuantDados = new BufferedReader(new FileReader("data/quantDados.txt"));
         List<LivroAux> livrosAuxiliares = GerarArrays.arrayLivrosAuxiliares(Integer.parseInt(fileQuantDados.readLine()));
         List<Autor> autores = GerarArrays.arrayAutores();
+        fileQuantDados.close();
         
+        //Criando Tabelas Hash
         TabelaLivros tabelaLivros = new TabelaLivros(livrosAuxiliares.size());
         for (LivroAux livroAux : livrosAuxiliares) 
             tabelaLivros.add(livroAux);
@@ -154,9 +157,7 @@ public class Main {
         for (Autor autor : autores) 
             tabelaAutores.add(autor);
 
-        fileQuantDados.close();
-
-        // int authorsNotFound = 0;
+        //Pecorrendo a tabela de livros e incrementando o contador em cada autor
         for (LivroAux livro : tabelaLivros.getLivros()) {
             for (long autor : livro.getAutores()) {
                 if (tabelaAutores.find(autor) != null) {
@@ -165,19 +166,26 @@ public class Main {
             }
         }
 
+        //Ordenando os autores em ordem decrescente em relação a quantidade de livros
         QuickSort quicksort = new QuickSort();
         Object[] autoresOrdenado = tabelaAutores.getAutores().toArray();
         quicksort.R_Quicksort(0, autoresOrdenado.length - 1, autoresOrdenado);
 
-        int cont = 0;
+        //Imprimindo ranking de todos os autores em um arquivo
+        FileWriter arqResultado = new FileWriter("resultados/ranking_de_autores.txt");
+        PrintWriter gravarArq = new PrintWriter(arqResultado);
+        gravarArq.println("------------- Ranking de Autores -------------\n");
+        System.out.println("------------- Ranking de Autores -------------\n");
+        int cont = 1;
         for (Object autor : autoresOrdenado) {
             Autor aux = (Autor) autor;
-            System.out.println(aux.getNome() + " - " + aux.getQuantLivros());
+            gravarArq.println(cont+"."+aux.getNome()+" - " + aux.getQuantLivros());
+            if(cont <= topAutores)
+                System.out.println(cont+"."+aux.getNome()+" - " + aux.getQuantLivros());
             cont++;
-            if (cont == 10) {
-                return;
-            }
         }
+
+        gravarArq.close();
     }
 
     public static void main(String[] args) throws ClassNotFoundException, Exception {
@@ -201,7 +209,7 @@ public class Main {
             switch (op) {
                 case 1:
                     System.out
-                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                            .print("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario1(entrada, opImprime);
@@ -210,7 +218,7 @@ public class Main {
 
                 case 2:
                     System.out
-                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                            .print("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario2(entrada, opImprime);
@@ -219,7 +227,7 @@ public class Main {
 
                 case 3:
                     System.out
-                            .println("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
+                            .print("Deseja imprimir os vetores ordenados no arquivo de resultados? (0-Nao/1-Sim): ");
                     opImprime = sc.nextInt();
                     entrada = new BufferedReader(new FileReader("data/entrada.txt"));
                     cenario3(entrada, opImprime);
@@ -227,7 +235,9 @@ public class Main {
                     break;
 
                 case 4:
-                    parte2();
+                    System.out.print("Quantidade de autores exibidos no ranking: ");
+                    opImprime = sc.nextInt();
+                    parte2(opImprime);
                     break;
 
                 case 5:
