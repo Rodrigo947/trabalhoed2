@@ -3,10 +3,10 @@ package Arvores;
 public class ArvVermelhoPreto {
     private NoVermelhoPreto nil = new NoVermelhoPreto();
     private NoVermelhoPreto raiz = nil;
-    int comparacoesBusca = 0;
-    int copiasBusca = 0;
-    int comparacoesInsere = 0;
-    int copiasInsere = 0;
+    public int comparacoesBusca = 0;
+    public int copiasBusca = 0;
+    public int comparacoesInsere = 0;
+    public int copiasInsere = 0;
 
     public ArvVermelhoPreto() {
         raiz.esquerda = nil;
