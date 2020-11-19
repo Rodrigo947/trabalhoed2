@@ -66,7 +66,7 @@ public class GerarArquivos {
                             livros = gerar.arrayLivros(tam, quantDados, nAleatoriosUnicos);
                             gerarArquivoArray(livros, tam, seed);
                         }
-*/
+                        */
                         idsLivros = gerar.arrayIds(tam, quantDados, nAleatoriosUnicos);
                         gerarArquivoArray(idsLivros, tam, seed);
                     }

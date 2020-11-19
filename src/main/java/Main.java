@@ -1,5 +1,6 @@
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -172,7 +173,7 @@ public class Main {
         quicksort.R_Quicksort(0, autoresOrdenado.length - 1, autoresOrdenado);
 
         //Imprimindo ranking de todos os autores em um arquivo
-        FileWriter arqResultado = new FileWriter("resultados/ranking_de_autores.txt");
+        FileWriter arqResultado = new FileWriter("resultados/Parte2/ranking_de_autores.txt");
         PrintWriter gravarArq = new PrintWriter(arqResultado);
         gravarArq.println("------------- Ranking de Autores -------------\n");
         System.out.println("------------- Ranking de Autores -------------\n");
@@ -188,6 +189,61 @@ public class Main {
         gravarArq.close();
     }
 
+    public static void parte3() throws Exception{
+        BufferedReader entrada = new BufferedReader(new FileReader("data/entrada.txt"));
+        int quantTamanhos = Integer.parseInt(entrada.readLine()); // quantos tipos de tamanhos estão no arquivo de entrada.txt
+        FileInputStream arqIds;
+        Long ids[];
+        int tam;
+        
+        for (int i = 0; i < quantTamanhos; i++) {
+            tam = Integer.parseInt(entrada.readLine());
+            
+            //Criando pastas de resultados
+            File pasta = new File("resultados/Parte3/" + tam);
+            pasta.mkdir();
+            
+            //Arquivos q contem tds os resultados das seeds no tamanho determinado por tam
+            FileWriter arqResultadosInsercao = new FileWriter("resultados/Parte3/"+tam+"/saidaInsercao.txt");
+            FileWriter arqResultadosBusca = new FileWriter("resultados/Parte3/"+tam+"/saidaBusca.txt");
+            PrintWriter gravarArqInsercao = new PrintWriter(arqResultadosInsercao);
+            PrintWriter gravarArqBusca = new PrintWriter(arqResultadosBusca);
+
+            for (int seed = 1; seed < 6; seed++) {
+
+                gravarArqInsercao.println("------SEED: "+seed+"------");
+                gravarArqBusca.println("------SEED: "+seed+"------");
+
+                arqIds = new FileInputStream("data/arrays/" + tam + "/I_" + tam + "_" + seed + ".txt");
+                ids = GerarArrays.arqParaVetorInteger(arqIds, tam); // gerando o array a partir do arquivo de acordo com o tamanho e seed
+                
+                /*
+                ArvB arvB = new ArvB();
+                for (Long id : ids) 
+                    arvB.insere(id);
+                
+                gravarArqInsercao.println("Copias: "+arvB.copias);
+                gravarArqInsercao.println("Comparacoes: "+arvB.comparacoes);
+                gravarArqInsercao.println("Tempo: ");
+
+                ArvVermelhoPreto arvVP = new ArvVermelhoPreto();
+                for (Long id : ids) 
+                    arvVP.busca(id);
+                
+                gravarArqBusca.println("Copias: "+arvVP.copias);
+                gravarArqBusca.println("Comparacoes: "+arvVP.comparacoes);
+                gravarArqBusca.println("Tempo: ");
+                */
+
+                arqIds.close();
+            }
+
+            arqResultadosInsercao.close();
+            arqResultadosBusca.close();
+        }
+        entrada.close();
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, Exception {
 
         // --------------------MENU---------------------
@@ -200,8 +256,9 @@ public class Main {
             System.out.println("2-Cenario 2");
             System.out.println("3-Cenario 3");
             System.out.println("4-Parte 2");
-            System.out.println("5-Gerar Arquivo de Objetos");
-            System.out.println("6-Gerar Arquivos de Arrays");
+            System.out.println("5-Parte 3");
+            System.out.println("6-Gerar Arquivo de Objetos");
+            System.out.println("7-Gerar Arquivos de Arrays");
             System.out.println("0-Sair");
             System.out.print("Opcao: ");
             op = sc.nextInt();
@@ -241,10 +298,14 @@ public class Main {
                     break;
 
                 case 5:
-                    GerarArquivos.criarArqObj();
+                    parte3();
                     break;
 
                 case 6:
+                    GerarArquivos.criarArqObj();
+                    break;
+
+                case 7:
                     GerarArquivos.criarArqArrays();
                     break;
 

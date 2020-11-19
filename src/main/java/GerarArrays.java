@@ -369,4 +369,21 @@ public class GerarArrays {
         return livros;
     }
 
+    /**
+     * Gera um vetor de ids a partir de um arquivo do tipo I_tamanho_seed.txt
+     *
+     * @param file arquivo a ser lido
+     * @param tam  tamanho do vetor gerado
+     * @return vetor de strings
+     * @throws IOException
+     */
+    public static Long[] arqParaVetorInteger(FileInputStream file, int tam) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(file));
+        Long[] ids = new Long[tam];
+        for (int i = 0; i < tam; i++) {
+            ids[i] = Long.parseLong(br.readLine());
+        }
+        return ids;
+    }
+
 }
