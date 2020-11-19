@@ -46,6 +46,7 @@ public class GerarArquivos {
             GerarArrays gerar = new GerarArrays();
             String[] titulos;
             Livro[] livros;
+            Long[] idsLivros;
             Integer[] nAleatoriosUnicos;
 
             for (int i = 0; i < quantTamanhos; i++) {
@@ -57,7 +58,7 @@ public class GerarArquivos {
                     for (int seed = 1; seed < 6; seed++) {
                         System.out.println("\n"+"----SEED "+seed+"----\n");
                         nAleatoriosUnicos = gerar.escolheNPosicoes(tam, seed, quantDados);
-
+                       /* 
                         titulos = gerar.arrayTitulos(tam, quantDados, nAleatoriosUnicos);
                         gerarArquivoArray(titulos, tam, seed);
 
@@ -65,6 +66,9 @@ public class GerarArquivos {
                             livros = gerar.arrayLivros(tam, quantDados, nAleatoriosUnicos);
                             gerarArquivoArray(livros, tam, seed);
                         }
+*/
+                        idsLivros = gerar.arrayIds(tam, quantDados, nAleatoriosUnicos);
+                        gerarArquivoArray(idsLivros, tam, seed);
                     }
                 }
                 else{
@@ -90,6 +94,14 @@ public class GerarArquivos {
             PrintWriter gravarString = new PrintWriter(arqSaida);
             for (String string : (String[]) array) 
                 gravarString.println(string);
+            gravarString.close();
+            arqSaida.close();
+        }
+        else if(array instanceof Long[]){
+            FileWriter arqSaida = new FileWriter("data/arrays/"+tamanho+"/I_"+tamanho+"_"+seed+".txt");
+            PrintWriter gravarString = new PrintWriter(arqSaida);
+            for (Long id : (Long[]) array) 
+                gravarString.println(id);
             gravarString.close();
             arqSaida.close();
         }

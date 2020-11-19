@@ -139,8 +139,70 @@ public class GerarArrays {
         }
         System.out.println("");
         oi.close();
-
+        fi.close();
         return livros;
+    }
+    // END ------------------
+
+    /**
+     * Cria um vetor do tipo inteiro com ids aleatórios
+     *
+     * @param tam        tamanho da lista
+     * @param quantDados quantidade de dados do arquivo
+     * @param posicoes   vetor de posicoes escolhidas aleatoriamente
+     * @throws java.io.FileNotFoundException
+     * @throws java.lang.ClassNotFoundException
+     */
+    public Long[] arrayIds(int tam, int quantDados, Integer posicoes[])
+            throws FileNotFoundException, IOException, ClassNotFoundException, Exception {
+
+        BufferedInputStream fi = new BufferedInputStream(new FileInputStream("data/datasetOBJ.txt"));
+        ObjectInputStream oi = new ObjectInputStream(fi);
+        Long[] idsLivros = new Long[tam];
+        int progresso = 1, progressoAtual = 0, posicaoAtual;
+        long quantlinhas = 0;
+
+        System.out.println("Construindo array de Ids com " + tam + " posicoes aleatorias...");
+        for (int i = 0, j = 0; i < quantDados && j < tam; i++, quantlinhas++) {
+
+            if (progresso < progressoAtual) {
+                System.out.print("\r[");
+
+                for (int aux = 0; aux < 10; aux++) {
+                    if (aux < progresso / 10)
+                        System.out.print("=");
+                    else if (aux == progresso / 10)
+                        System.out.print(">");
+                    else
+                        System.out.print(" ");
+                }
+
+                System.out.print("]" + progresso + "% ");
+
+                progresso = (int) progressoAtual;
+            }
+
+            progressoAtual = (int) (quantlinhas * 100) / quantDados;
+
+            // verifica se a posição atual foi selecionada
+            if (posicoes[j] == i) {
+                idsLivros[j] = ((Livro) oi.readObject()).getId();
+                posicaoAtual = j;
+                j++;
+                
+                while (j < tam && posicoes[j] == i) {
+                    idsLivros[j] = idsLivros[posicaoAtual];
+                    j++;
+                }
+
+            } else {
+                oi.readObject();
+            }
+        }
+        System.out.println("");
+        oi.close();
+        fi.close();
+        return idsLivros;
     }
     // END ------------------
 
