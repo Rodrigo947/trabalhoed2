@@ -34,7 +34,7 @@ TRABALHO DE ESTRUTURA DE DADOS 2
 0-Sair
 Opcao:
 ```
-Antes de processar qualquer cenário é necessário rodar as opções 6 e 7 em sequência.
+Antes de processar quaisquer opções de 1 à 5 é necessário rodar as opções 6 e 7 emsequência.
 
 ### Opção 6
 
@@ -88,3 +88,7 @@ Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da 
 | MergeSort      | Implementação de todas as funções necessárias para executar a ordenação do tipo Merge Sort                                 |
 | TreeSort       | Implementação de todas as funções necessárias para executar a ordenação do tipo Tree Sort                                  |
 | QuickSort      | Implementação de todas as funções necessárias para executar os sequintes tipos de Quick Sort: Recursivo, Mediana, Inserção |
+
+## Parte 2 e 3
+
+Para mais informções sobre esse parte, consulte o arquivo  Relatório.pdf. 
