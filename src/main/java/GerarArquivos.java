@@ -58,7 +58,7 @@ public class GerarArquivos {
                     for (int seed = 1; seed < 6; seed++) {
                         System.out.println("\n"+"----SEED "+seed+"----\n");
                         nAleatoriosUnicos = gerar.escolheNPosicoes(tam, seed, quantDados);
-                       /* 
+                        
                         titulos = gerar.arrayTitulos(tam, quantDados, nAleatoriosUnicos);
                         gerarArquivoArray(titulos, tam, seed);
 
@@ -66,7 +66,7 @@ public class GerarArquivos {
                             livros = gerar.arrayLivros(tam, quantDados, nAleatoriosUnicos);
                             gerarArquivoArray(livros, tam, seed);
                         }
-                        */
+                        
                         idsLivros = gerar.arrayIds(tam, quantDados, nAleatoriosUnicos);
                         gerarArquivoArray(idsLivros, tam, seed);
                     }
@@ -82,7 +82,7 @@ public class GerarArquivos {
     }
 
     /**
-     * Gera um arquivo que com uma lista de titulos escohidos aleatóriamente e guarda em um arquivo
+     * Gera um arquivo que com uma lista de titulos escohidos aleatóriamente
      * @param array array a se gerado. Pode ser do tipo string ou um array de objetos Livro
      * @param tamanho tamanho do array  a se gerado
      * @param seed seed usada para escolher os livros 

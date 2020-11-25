@@ -222,30 +222,30 @@ public class Main {
                 arqIds = new FileInputStream("data/arrays/" + tam + "/I_" + tam + "_" + seed + ".txt");
                 ids = GerarArrays.arqParaVetorInteger(arqIds, tam); // gerando o array a partir do arquivo de acordo com o tamanho e seed
                 
-                ArvB arvB3 = new ArvB(3);
+                ArvB arvB2 = new ArvB(2);
                 startTime = System.currentTimeMillis();
                 
                 for (Long id : ids){ 
-                    arvB3.insere(id);
+                    arvB2.insere(id);
                 }
                 endTime = System.currentTimeMillis();
                 timeInsercao = (endTime - startTime) / 1000.0;
                 
                 startTime = System.currentTimeMillis();
                 for (Long id : ids) 
-                    arvB3.busca(id);
+                    arvB2.busca(id);
                 endTime = System.currentTimeMillis();
                 timeBusca = (endTime - startTime) / 1000.0;
                 
-                gravarArqInsercao.println("ArvB 2");
-                gravarArqInsercao.println("Copias Insere: "+arvB3.copiasInsere);
-                gravarArqInsercao.println("Comparacoes Insere: "+arvB3.comparacoesInsere);
-                gravarArqInsercao.println("Tempo Insere: "+timeInsercao+"\n");
+                gravarArqInsercao.println("Arvore B 2");
+                gravarArqInsercao.println("Copias: "+arvB2.copiasInsere);
+                gravarArqInsercao.println("Comparacoes: "+arvB2.comparacoesInsere);
+                gravarArqInsercao.println("Tempo: "+timeInsercao+"\n");
 
-                gravarArqBusca.println("ArvB 2");
-                gravarArqBusca.println("Copias Busca: "+arvB3.copiasBusca);
-                gravarArqBusca.println("Comparacoes Busca: "+arvB3.comparacoesBusca);
-                gravarArqBusca.println("Tempo Busca: "+timeBusca+"\n");
+                gravarArqBusca.println("Arvore B 2");
+                gravarArqBusca.println("Copias: "+arvB2.copiasBusca);
+                gravarArqBusca.println("Comparacoes: "+arvB2.comparacoesBusca);
+                gravarArqBusca.println("Tempo: "+timeBusca+"\n");
 
                 ArvB arvB20 = new ArvB(20);
                 startTime = System.currentTimeMillis();
@@ -262,15 +262,15 @@ public class Main {
                 endTime = System.currentTimeMillis();
                 timeBusca = (endTime - startTime) / 1000.0;
                 
-                gravarArqInsercao.println("ArvB 20");
-                gravarArqInsercao.println("Copias Insere: "+arvB20.copiasInsere);
-                gravarArqInsercao.println("Comparacoes Insere: "+arvB20.comparacoesInsere);
-                gravarArqInsercao.println("Tempo Insere: "+timeInsercao+"\n");
+                gravarArqInsercao.println("Arvore B 20");
+                gravarArqInsercao.println("Copias: "+arvB20.copiasInsere);
+                gravarArqInsercao.println("Comparacoes: "+arvB20.comparacoesInsere);
+                gravarArqInsercao.println("Tempo: "+timeInsercao+"\n");
 
-                gravarArqBusca.println("ArvB 20");
-                gravarArqBusca.println("Copias Busca: "+arvB20.copiasBusca);
-                gravarArqBusca.println("Comparacoes Busca: "+arvB20.comparacoesBusca);
-                gravarArqBusca.println("Tempo Busca: "+timeBusca+"\n");
+                gravarArqBusca.println("Arvore B 20");
+                gravarArqBusca.println("Copias: "+arvB20.copiasBusca);
+                gravarArqBusca.println("Comparacoes: "+arvB20.comparacoesBusca);
+                gravarArqBusca.println("Tempo: "+timeBusca+"\n");
 
                 ArvVermelhoPreto arvVP = new ArvVermelhoPreto();
                 startTime = System.currentTimeMillis();
@@ -287,15 +287,15 @@ public class Main {
                 endTime = System.currentTimeMillis();
                 timeBusca = (endTime - startTime) / 1000.0;
                 
-                gravarArqInsercao.println("ArvVP");
-                gravarArqInsercao.println("Copias Insere: "+arvVP.copiasInsere);
-                gravarArqInsercao.println("Comparacoes Insere: "+arvVP.comparacoesInsere);
-                gravarArqInsercao.println("Tempo Insere: "+timeInsercao+"\n");
+                gravarArqInsercao.println("Arvore Vermelho Preto");
+                gravarArqInsercao.println("Copias: "+arvVP.copiasInsere);
+                gravarArqInsercao.println("Comparacoes: "+arvVP.comparacoesInsere);
+                gravarArqInsercao.println("Tempo: "+timeInsercao+"\n");
 
-                gravarArqBusca.println("ArvVP");
-                gravarArqBusca.println("Copias Busca: "+arvVP.copiasBusca);
-                gravarArqBusca.println("Comparacoes Busca: "+arvVP.comparacoesBusca);
-                gravarArqBusca.println("Tempo Busca: "+timeBusca+"\n");
+                gravarArqBusca.println("Arvore Vermelho Preto");
+                gravarArqBusca.println("Copias: "+arvVP.copiasBusca);
+                gravarArqBusca.println("Comparacoes: "+arvVP.comparacoesBusca);
+                gravarArqBusca.println("Tempo: "+timeBusca+"\n");
                 
                 arqIds.close();
             }
