@@ -12,7 +12,7 @@
 ```bash
 $ git clone https://github.com/Rodrigo947/trabalhoed2
 ```
-**3.** Faça o download do dataset no link https://drive.google.com/file/d/1Wg6pAx5sjdSS8M-9UNIEQPQiy_dS4Fzb/view?usp=sharing e extraia os arquivos na pasta `data` do projeto.
+**3.** Faça o download do dataset no link https://drive.google.com/file/d/1akPqLZg-_Ug2SUyPWJ4bwjcWFP9tsKgL/view?usp=sharing e extraia os arquivos na pasta `data` do projeto.
 
 **4.** Abra um terminal na pasta e execute o comando:
 
@@ -27,24 +27,26 @@ TRABALHO DE ESTRUTURA DE DADOS 2
 1-Cenario 1
 2-Cenario 2
 3-Cenario 3
-4-Gerar Arquivo de Objetos
-5-Gerar Arquivos de Arrays
+4-Parte 2
+5-Parte 3
+6-Gerar Arquivo de Objetos
+7-Gerar Arquivos de Arrays
 0-Sair
 Opcao:
 ```
-Antes de processar qualquer cenário é necessário rodar as opções 4 e 5 em sequencia.
+Antes de processar quaisquer opções de 1 à 5 é necessário rodar as opções 6 e 7 emsequência.
 
-### Opção 4
+### Opção 6
 
 Responsável por fazer o pré processamento do dataset criando um arquivo de objetos onde cada objeto guarda um registro do dataset.
 
 O arquivo gerado está em `data/datasetOBJ.txt`.
 
-### Opção 5
+### Opção 7
 
 A partir do arquivo `data/entrada.txt`, essa opção gera os arquivos de arrays aleatórios que serão usados por cada cenário e os guarda na pasta `data/arrays/`. Uma pasta é criada para cada tamanho de vetor e o nome de dos arquivos seguem o seguinte padrão: **tipoDeArray_tamanhoDoArray_seed.txt**
 
-**OBS.: A geração desses arquivos podem demorar muito tempo portanto, caso queira pular a execução das opções 4 e 5, faça o download de toda a pasta `data` no seguinte link:** https://drive.google.com/file/d/1WZo9tnTyR2zY-Ii5ScGUXF2YFg0Otx7V/view?usp=sharing
+**OBS.: A geração desses arquivos podem demorar muito tempo, portanto caso queira pular a execução das opções 6 e 7, faça o download de todos os arquivos tratados e extraia na pasta data.** https://drive.google.com/file/d/1aktD1ncPi1pcvm-8jznUlVvDC4oOfZT_/view?usp=sharing
 
 ### Cenários
 
@@ -86,3 +88,7 @@ Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da 
 | MergeSort      | Implementação de todas as funções necessárias para executar a ordenação do tipo Merge Sort                                 |
 | TreeSort       | Implementação de todas as funções necessárias para executar a ordenação do tipo Tree Sort                                  |
 | QuickSort      | Implementação de todas as funções necessárias para executar os sequintes tipos de Quick Sort: Recursivo, Mediana, Inserção |
+
+## Parte 2 e 3
+
+Para mais informções sobre esse parte, consulte o arquivo  Relatório.pdf. 
