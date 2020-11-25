@@ -91,4 +91,4 @@ Com o objetivo de organizar o código do trabalho, os arquivos foram dividos da 
 
 ## Parte 2 e 3
 
-Para mais informções sobre esse parte, consulte o arquivo  Relatório.pdf. 
+Para mais informações sobre esse parte, consulte o arquivo  Relatório.pdf. 
